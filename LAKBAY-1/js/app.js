@@ -46,7 +46,7 @@ function init() {
   console.log('[Lakbay] App initialized. Event E1 triggered.');
 
   // 1. Restore persistent user data from localStorage
-  loadSavedData();
+  loadData();
 
   // 2. Setup Navigation and Section Switching Listeners
   setupNavigation();
@@ -83,9 +83,12 @@ function init() {
 }
 
 /* ==========================================================================
-   LOCALSTORAGE PERSISTENCE (saveData, loadSavedData)
+   LOCALSTORAGE PERSISTENCE (saveData, loadData)
    ========================================================================== */
-function loadSavedData() {
+/**
+ * Reads favorites, itinerary, and budget back from localStorage inside init()
+ */
+function loadData() {
   try {
     const savedFavs = localStorage.getItem(STORAGE_KEYS.FAVORITES);
     if (savedFavs) {
@@ -105,6 +108,7 @@ function loadSavedData() {
     console.error('[Lakbay] Error loading saved data from localStorage:', err);
   }
 }
+const loadSavedData = loadData;
 
 function saveData() {
   try {
@@ -1084,9 +1088,25 @@ function setupBudgetControls() {
     });
   });
 
-  // E15: Save budget
+  // E15: Click Save budget -> validateBudget(), saveData()
   if (saveBtn) {
-    saveBtn.addEventListener('click', saveBudget);
+    saveBtn.addEventListener('click', () => {
+      if (validateBudget()) {
+        calculateBudget();
+        saveData();
+
+        const successBanner = document.getElementById('budget-success-msg');
+        if (successBanner) {
+          successBanner.textContent = '✓ Budget saved.';
+          successBanner.style.display = 'block';
+          setTimeout(() => {
+            successBanner.style.display = 'none';
+          }, 3500);
+        }
+
+        showToast('Budget successfully saved! 💰', 'success');
+      }
+    });
   }
 
   // E16: Reset budget
@@ -1162,9 +1182,11 @@ function calculateBudget() {
 }
 
 /**
- * E15: Validates and saves budget to localStorage
+ * E15: Validates budget inputs.
+ * Empty, negative or non-numeric values show an error; returns boolean.
+ * @returns {boolean}
  */
-function saveBudget() {
+function validateBudget() {
   const transInput = document.getElementById('budget-transportation');
   const accInput = document.getElementById('budget-accommodation');
   const foodInput = document.getElementById('budget-food');
@@ -1177,50 +1199,76 @@ function saveBudget() {
   if (errorBanner) errorBanner.style.display = 'none';
   if (successBanner) successBanner.style.display = 'none';
 
-  // Validation: Check for negative values
-  const inputs = [transInput, accInput, foodInput, actInput];
-  let hasNegative = false;
+  let isValid = true;
+  const costInputs = [transInput, accInput, foodInput, actInput];
 
-  inputs.forEach(input => {
-    if (input && parseFloat(input.value) < 0) {
-      hasNegative = true;
+  // Clear previous field errors
+  ['budget-transportation', 'budget-accommodation', 'budget-food', 'budget-activities', 'budget-travelers'].forEach(id => {
+    const el = document.getElementById(id);
+    const err = document.getElementById(`error-${id}`);
+    if (el) el.classList.remove('is-invalid');
+    if (err) err.textContent = '';
+  });
+
+  // Check each cost input: empty, non-numeric, or negative
+  costInputs.forEach(input => {
+    if (!input) return;
+    const valStr = input.value.trim();
+    const valNum = Number(valStr);
+
+    if (valStr === '' || isNaN(valNum) || valNum < 0) {
+      isValid = false;
       input.classList.add('is-invalid');
-    } else if (input) {
-      input.classList.remove('is-invalid');
+      const errSpan = document.getElementById(`error-${input.id}`);
+      if (errSpan) {
+        errSpan.textContent = 'Enter a number of 0 or more.';
+      }
     }
   });
 
-  if (travInput && parseInt(travInput.value, 10) < 1) {
-    hasNegative = true;
-    travInput.classList.add('is-invalid');
-  }
-
-  if (hasNegative) {
-    if (errorBanner) {
-      errorBanner.textContent = 'Enter a number of 0 or more.';
-      errorBanner.style.display = 'block';
+  // Check travelers input: must be >= 1 integer
+  if (travInput) {
+    const travStr = travInput.value.trim();
+    const travNum = Number(travStr);
+    if (travStr === '' || isNaN(travNum) || travNum < 1) {
+      isValid = false;
+      travInput.classList.add('is-invalid');
+      const errSpan = document.getElementById('error-budget-travelers');
+      if (errSpan) {
+        errSpan.textContent = 'Enter a number of 1 or more travelers.';
+      }
     }
-    return;
   }
 
-  // Recalculate and persist
-  calculateBudget();
-  saveData();
-
-  // Show green success alert (Wireframe explicit: "Budget saved.")
-  if (successBanner) {
-    successBanner.textContent = '✓ Budget saved.';
-    successBanner.style.display = 'block';
-    setTimeout(() => {
-      successBanner.style.display = 'none';
-    }, 3500);
+  if (!isValid && errorBanner) {
+    errorBanner.textContent = 'Enter a number of 0 or more.';
+    errorBanner.style.display = 'block';
   }
 
-  showToast('Budget successfully saved! 💰', 'success');
+  return isValid;
 }
 
 /**
- * E16: Clears budget inputs, resets calculation to 0, and saves to localStorage
+ * Backward compatibility alias for saveBudget
+ */
+function saveBudget() {
+  if (validateBudget()) {
+    calculateBudget();
+    saveData();
+    const successBanner = document.getElementById('budget-success-msg');
+    if (successBanner) {
+      successBanner.textContent = '✓ Budget saved.';
+      successBanner.style.display = 'block';
+      setTimeout(() => {
+        successBanner.style.display = 'none';
+      }, 3500);
+    }
+    showToast('Budget successfully saved! 💰', 'success');
+  }
+}
+
+/**
+ * E16: Clears budget inputs back to 0 and clears the saved budget from localStorage
  */
 function resetBudget() {
   const inputs = [
@@ -1232,24 +1280,43 @@ function resetBudget() {
 
   inputs.forEach(id => {
     const el = document.getElementById(id);
+    const err = document.getElementById(`error-${id}`);
     if (el) {
-      el.value = '';
+      el.value = '0';
       el.classList.remove('is-invalid');
     }
+    if (err) err.textContent = '';
   });
 
   const travInput = document.getElementById('budget-travelers');
-  if (travInput) travInput.value = '1';
+  const travErr = document.getElementById('error-budget-travelers');
+  if (travInput) {
+    travInput.value = '1';
+    travInput.classList.remove('is-invalid');
+  }
+  if (travErr) travErr.textContent = '';
 
   const errorBanner = document.getElementById('budget-error-msg');
   const successBanner = document.getElementById('budget-success-msg');
   if (errorBanner) errorBanner.style.display = 'none';
   if (successBanner) successBanner.style.display = 'none';
 
-  calculateBudget();
-  saveData();
+  // Clear saved budget in localStorage and appState
+  localStorage.removeItem(STORAGE_KEYS.BUDGET);
+  appState.budget = {
+    transportation: 0,
+    accommodation: 0,
+    food: 0,
+    activities: 0,
+    travelers: 1,
+    total: 0,
+    perPerson: 0
+  };
 
-  showToast('Budget inputs reset to zero.', 'info');
+  calculateBudget();
+  renderHomeStats();
+
+  showToast('Fields returned to 0 and saved budget cleared.', 'info');
 }
 
 /* ==========================================================================
@@ -1259,9 +1326,9 @@ function setupSummaryControls() {
   const genBtn = document.getElementById('btn-generate-summary');
   const printBtn = document.getElementById('btn-print-summary');
 
-  // E17: Click Generate summary
+  // E17: Click Generate summary -> buildSummary()
   if (genBtn) {
-    genBtn.addEventListener('click', generateSummary);
+    genBtn.addEventListener('click', buildSummary);
   }
 
   // Print summary report
@@ -1273,9 +1340,10 @@ function setupSummaryControls() {
 }
 
 /**
- * E17: Collects favorites, itinerary stops, and budget data and renders consolidated report
+ * E17: Plan Summary - Click Generate summary
+ * Summary shows favorites, itinerary and budget total, or an empty state.
  */
-function generateSummary() {
+function buildSummary() {
   const reportCard = document.getElementById('summary-report-card');
   const emptyState = document.getElementById('summary-empty-state');
   const printBtn = document.getElementById('btn-print-summary');
@@ -1348,6 +1416,7 @@ function generateSummary() {
 
   showToast('Trip plan summary generated! 📋', 'success');
 }
+const generateSummary = buildSummary; // Alias for backward compatibility
 
 /* ==========================================================================
    UTILITY & HELPER FUNCTIONS
