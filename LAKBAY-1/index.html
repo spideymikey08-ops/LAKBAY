@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lakbay | Baguio City Travel Explorer & Itinerary Planner</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ==================== HEADER & NAVIGATION (E2) ==================== -->
+  <header class="navbar" id="main-nav">
+    <div class="nav-container">
+      <a href="#home" class="brand-logo" data-section="home" aria-label="Lakbay Home">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m14 12-8.5 8.5a2.12 2.12 0 1 1-3-3L11 9"></path>
+          <path d="M16 16l6-6-8.5-8.5a2.12 2.12 0 1 0-3 3L13.5 7"></path>
+          <circle cx="17.5" cy="6.5" r="1.5"></circle>
+        </svg>
+        <span class="brand-text">Lakbay</span>
+        <span class="brand-tag">Baguio</span>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-links" id="nav-links">
+        <button type="button" class="nav-item active" data-section="home">Home</button>
+        <button type="button" class="nav-item" data-section="explore">Explore</button>
+        <button type="button" class="nav-item" data-section="itinerary">Itinerary</button>
+        <button type="button" class="nav-item badge-item" data-section="favorites">
+          Favorites <span class="nav-badge" id="nav-fav-badge">0</span>
+        </button>
+        <button type="button" class="nav-item" data-section="budget">Budget</button>
+        <button type="button" class="nav-item" data-section="summary">Summary</button>
+      </nav>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main App Viewport (Single Page Container) -->
+  <main class="app-main" id="app-viewport">
+
+    <!-- ==================== SCREEN 1: HOME (E1, E2) ==================== -->
+    <section class="app-screen active" id="section-home">
+      <div class="screen-container">
+        <!-- Hero Section -->
+        <div class="hero-card">
+          <div class="hero-content">
+            <span class="hero-pill">✨ The Summer Capital of the Philippines</span>
+            <h1 class="hero-title">Discover places. <br><span class="highlight-text">Plan the trip.</span></h1>
+            <p class="hero-subtitle">
+              Explore destinations, build an itinerary and estimate your budget in one place. Discover pine-scented hills, historic treasures, and mountain getaways.
+            </p>
+            <div class="hero-actions">
+              <button class="btn btn-primary btn-lg" id="btn-start-exploring" data-section="explore">
+                Start exploring
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+              <button class="btn btn-outline btn-lg" data-section="itinerary">
+                View Itinerary
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Stats Dashboard (E1: Restored from localStorage) -->
+        <div class="stats-row">
+          <div class="stat-card" data-section="favorites" role="button" tabindex="0">
+            <div class="stat-icon-wrap stat-icon-fav">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">Saved places</span>
+              <span class="stat-number" id="home-stat-favorites">0</span>
+            </div>
+          </div>
+
+          <div class="stat-card" data-section="itinerary" role="button" tabindex="0">
+            <div class="stat-icon-wrap stat-icon-stops">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">Planned stops</span>
+              <span class="stat-number" id="home-stat-stops">0</span>
+            </div>
+          </div>
+
+          <div class="stat-card" data-section="budget" role="button" tabindex="0">
+            <div class="stat-icon-wrap stat-icon-budget">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-label">Estimated budget</span>
+              <span class="stat-number" id="home-stat-budget">₱ 0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Destinations Section -->
+        <div class="section-block">
+          <div class="section-header-row">
+            <div>
+              <h2 class="section-title">Featured destinations</h2>
+              <p class="section-subtitle">Top-rated spots travelers love in Baguio</p>
+            </div>
+            <button class="link-btn" data-section="explore">See all destinations &rarr;</button>
+          </div>
+          <div class="cards-grid" id="home-featured-grid">
+            <!-- Dynamically populated by JS (E1) -->
+          </div>
+        </div>
+
+        <!-- Travel Recommendations -->
+        <div class="section-block">
+          <h2 class="section-title">Travel recommendations</h2>
+          <p class="section-subtitle">Smart tips for a seamless Baguio mountain holiday</p>
+          <div class="tips-grid">
+            <div class="tip-card">
+              <div class="tip-badge">Tip 1</div>
+              <h3 class="tip-title">Pack Warm Layers</h3>
+              <p class="tip-desc">Temperatures can drop sharply in the late afternoon and evenings (12°C–16°C). Always bring a windbreaker, sweater, and comfortable walking shoes.</p>
+            </div>
+            <div class="tip-card">
+              <div class="tip-badge">Tip 2</div>
+              <h3 class="tip-title">Start Early to Beat Traffic</h3>
+              <p class="tip-desc">Baguio's popular routes around Burnham, Wright Park, and Mines View get busy after 10 AM. Visit nature spots early morning for serene pine views.</p>
+            </div>
+            <div class="tip-card">
+              <div class="tip-badge">Tip 3</div>
+              <h3 class="tip-title">Taste Local Specialties</h3>
+              <p class="tip-desc">Don't miss hot strawberry taho from local vendors, freshly baked raisin bread from Baguio Country Club, and Good Shepherd Convent ube jam.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 2: EXPLORE (E3, E4, E5, E6, E8) ==================== -->
+    <section class="app-screen" id="section-explore">
+      <div class="screen-container">
+        <div class="explore-header">
+          <div>
+            <h1 class="page-title">Explore Baguio Destinations</h1>
+            <p class="page-subtitle">Search, filter by category, and discover points of interest.</p>
+          </div>
+        </div>
+
+        <!-- Search Bar (E3) -->
+        <div class="search-bar-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input 
+            type="text" 
+            id="search-input" 
+            class="search-input" 
+            placeholder="Search by name, activity or place..."
+            autocomplete="off"
+          >
+          <button type="button" class="search-clear-btn" id="search-clear-btn" aria-label="Clear search" style="display: none;">&times;</button>
+        </div>
+
+        <!-- Filter Chips & Sorting Row (E4, E5) -->
+        <div class="filter-sort-bar">
+          <div class="category-chips" id="category-chips-container">
+            <button class="chip active" data-category="All">All</button>
+            <button class="chip" data-category="Beaches">Beaches</button>
+            <button class="chip" data-category="Mountains">Mountains</button>
+            <button class="chip" data-category="Historical">Historical</button>
+            <button class="chip" data-category="Adventure">Adventure</button>
+          </div>
+
+          <div class="sort-wrap">
+            <label for="sort-dropdown" class="sort-label">Sort:</label>
+            <select id="sort-dropdown" class="sort-select">
+              <option value="name-asc">A to Z</option>
+              <option value="name-desc">Z to A</option>
+              <option value="fee-asc">Entrance Fee: Low to High</option>
+              <option value="fee-desc">Entrance Fee: High to Low</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Results Counter (E5) -->
+        <div class="results-meta">
+          <span id="results-count-text">Showing 8 destinations</span>
+        </div>
+
+        <!-- Destination Cards Gallery -->
+        <div class="cards-grid" id="explore-cards-grid">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <!-- Empty State for Search / Filter -->
+        <div class="empty-state" id="explore-empty-state" style="display: none;">
+          <div class="empty-icon">🔍</div>
+          <h3 class="empty-title">No destinations match your search</h3>
+          <p class="empty-text">Try adjusting your keywords, selecting "All" categories, or resetting filters.</p>
+          <button class="btn btn-outline" id="btn-reset-explore-filters">Reset Filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 4: ITINERARY (E10, E11, E12, E13) ==================== -->
+    <section class="app-screen" id="section-itinerary">
+      <div class="screen-container">
+        <div class="screen-intro">
+          <h1 class="page-title">Travel Itinerary Planner</h1>
+          <p class="page-subtitle">Organize your daily travel activities and time schedules.</p>
+        </div>
+
+        <div class="itinerary-layout">
+          <!-- Left Column: Add a stop form -->
+          <div class="itinerary-form-col">
+            <div class="card form-card">
+              <div class="form-header">
+                <h2 class="card-title">Add a stop</h2>
+                <span class="form-tag">Step-by-step</span>
+              </div>
+
+              <form id="itinerary-form" novalidate>
+                <!-- Destination -->
+                <div class="form-group">
+                  <label for="itinerary-destination" class="form-label">Destination <span class="required">*</span></label>
+                  <select id="itinerary-destination" class="form-select" required>
+                    <option value="" disabled selected>Choose a destination</option>
+                    <!-- Populated dynamically -->
+                  </select>
+                  <span class="field-error" id="error-itinerary-destination"></span>
+                </div>
+
+                <!-- Date -->
+                <div class="form-group">
+                  <label for="itinerary-date" class="form-label">Date <span class="required">*</span></label>
+                  <input type="date" id="itinerary-date" class="form-input" required>
+                  <span class="field-error" id="error-itinerary-date"></span>
+                </div>
+
+                <!-- Time -->
+                <div class="form-group">
+                  <label for="itinerary-time" class="form-label">Time <span class="required">*</span></label>
+                  <input type="time" id="itinerary-time" class="form-input" required>
+                  <span class="field-error" id="error-itinerary-time"></span>
+                </div>
+
+                <!-- Activity -->
+                <div class="form-group">
+                  <label for="itinerary-activity" class="form-label">Activity <span class="required">*</span></label>
+                  <input 
+                    type="text" 
+                    id="itinerary-activity" 
+                    class="form-input" 
+                    placeholder="e.g. Boating & Pine picnic"
+                    required
+                  >
+                  <span class="field-error" id="error-itinerary-activity"></span>
+                </div>
+
+                <!-- Feedback Messages -->
+                <div class="alert-message alert-error" id="itinerary-form-error" style="display: none;"></div>
+                <div class="alert-message alert-success" id="itinerary-form-success" style="display: none;">
+                  ✓ Stop added to your itinerary.
+                </div>
+
+                <!-- Submit Button (E11) -->
+                <button type="submit" class="btn btn-primary btn-block" id="btn-add-itinerary">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  Add to itinerary
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Right Column: Itinerary Stops List -->
+          <div class="itinerary-list-col">
+            <div class="card list-card">
+              <div class="list-card-header">
+                <div>
+                  <h2 class="card-title">Your itinerary (<span id="itinerary-count">0</span> stops)</h2>
+                  <p class="card-caption">Sorted chronologically by date and time</p>
+                </div>
+                <button class="btn btn-sm btn-outline-danger" id="btn-clear-itinerary" title="Remove all stops">
+                  Clear all
+                </button>
+              </div>
+
+              <!-- List Container -->
+              <div class="itinerary-items-wrap" id="itinerary-items-list">
+                <!-- Dynamically generated items -->
+              </div>
+
+              <!-- Empty State -->
+              <div class="empty-state" id="itinerary-empty-state">
+                <div class="empty-icon">🗓️</div>
+                <h3 class="empty-title">No stops yet</h3>
+                <p class="empty-text">Add your first stop using the form on the left or select a destination from Explore.</p>
+                <button class="btn btn-outline btn-sm" data-section="explore">Browse Destinations</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 5: FAVORITES (E8, E9, E10) ==================== -->
+    <section class="app-screen" id="section-favorites">
+      <div class="screen-container">
+        <div class="screen-intro">
+          <h1 class="page-title">Your favorite destinations (<span id="favorites-count-header">0</span>)</h1>
+          <p class="page-subtitle">Quickly access the places you've bookmarked for your trip.</p>
+        </div>
+
+        <!-- Favorites Cards Grid -->
+        <div class="cards-grid" id="favorites-grid">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="favorites-empty-state" style="display: none;">
+          <div class="empty-icon">🤍</div>
+          <h3 class="empty-title">No favorites yet</h3>
+          <p class="empty-text">Tap the heart on any destination in the Explore gallery to save it here.</p>
+          <button class="btn btn-primary" data-section="explore">Discover Destinations</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 6: BUDGET CALCULATOR (E14, E15, E16) ==================== -->
+    <section class="app-screen" id="section-budget">
+      <div class="screen-container">
+        <div class="screen-intro">
+          <h1 class="page-title">Estimate your travel budget</h1>
+          <p class="page-subtitle">Track expected expenses and compute costs per traveler in real time.</p>
+        </div>
+
+        <div class="budget-layout">
+          <!-- Input Form -->
+          <div class="budget-form-col">
+            <div class="card">
+              <h2 class="card-title">Expense Inputs</h2>
+              <form id="budget-form" onsubmit="return false;">
+                <!-- Transportation -->
+                <div class="form-group">
+                  <label for="budget-transportation" class="form-label">Transportation (₱)</label>
+                  <div class="input-prefix-wrap">
+                    <span class="currency-prefix">₱</span>
+                    <input 
+                      type="number" 
+                      id="budget-transportation" 
+                      class="form-input budget-calc-input" 
+                      placeholder="0.00" 
+                      min="0" 
+                      step="any"
+                    >
+                  </div>
+                  <span class="field-error" id="error-budget-transportation"></span>
+                </div>
+
+                <!-- Accommodation -->
+                <div class="form-group">
+                  <label for="budget-accommodation" class="form-label">Accommodation (₱)</label>
+                  <div class="input-prefix-wrap">
+                    <span class="currency-prefix">₱</span>
+                    <input 
+                      type="number" 
+                      id="budget-accommodation" 
+                      class="form-input budget-calc-input" 
+                      placeholder="0.00" 
+                      min="0" 
+                      step="any"
+                    >
+                  </div>
+                  <span class="field-error" id="error-budget-accommodation"></span>
+                </div>
+
+                <!-- Food -->
+                <div class="form-group">
+                  <label for="budget-food" class="form-label">Food (₱)</label>
+                  <div class="input-prefix-wrap">
+                    <span class="currency-prefix">₱</span>
+                    <input 
+                      type="number" 
+                      id="budget-food" 
+                      class="form-input budget-calc-input" 
+                      placeholder="0.00" 
+                      min="0" 
+                      step="any"
+                    >
+                  </div>
+                  <span class="field-error" id="error-budget-food"></span>
+                </div>
+
+                <!-- Activities -->
+                <div class="form-group">
+                  <label for="budget-activities" class="form-label">Activities & Entrance Fees (₱)</label>
+                  <div class="input-prefix-wrap">
+                    <span class="currency-prefix">₱</span>
+                    <input 
+                      type="number" 
+                      id="budget-activities" 
+                      class="form-input budget-calc-input" 
+                      placeholder="0.00" 
+                      min="0" 
+                      step="any"
+                    >
+                  </div>
+                  <span class="field-error" id="error-budget-activities"></span>
+                </div>
+
+                <!-- Number of Travelers -->
+                <div class="form-group">
+                  <label for="budget-travelers" class="form-label">Number of travelers</label>
+                  <input 
+                    type="number" 
+                    id="budget-travelers" 
+                    class="form-input budget-calc-input" 
+                    value="1" 
+                    min="1" 
+                    step="1"
+                  >
+                  <span class="field-error" id="error-budget-travelers"></span>
+                </div>
+
+                <!-- Generic feedback message -->
+                <div class="alert-message alert-error" id="budget-error-msg" style="display: none;">
+                  Enter a number of 0 or more.
+                </div>
+                <div class="alert-message alert-success" id="budget-success-msg" style="display: none;">
+                  ✓ Budget saved.
+                </div>
+
+                <!-- Action Buttons (E15, E16) -->
+                <div class="budget-actions">
+                  <button type="button" class="btn btn-primary" id="btn-save-budget">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                    Save budget
+                  </button>
+                  <button type="button" class="btn btn-outline" id="btn-reset-budget">
+                    Reset
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Total Breakdown Live Card -->
+          <div class="budget-summary-col">
+            <div class="card budget-totals-card">
+              <span class="badge-pill">Live Calculation</span>
+              <h2 class="card-title">Estimated Totals</h2>
+              <p class="card-caption">Totals update automatically while typing</p>
+
+              <div class="totals-display">
+                <div class="total-box">
+                  <span class="total-label">Total budget</span>
+                  <span class="total-value" id="display-total-budget">₱ 0.00</span>
+                </div>
+                <div class="total-box">
+                  <span class="total-label">Per traveler</span>
+                  <span class="total-value" id="display-per-traveler">₱ 0.00</span>
+                </div>
+              </div>
+
+              <div class="budget-breakdown-table">
+                <div class="breakdown-row">
+                  <span>Transportation</span>
+                  <span id="summary-breakdown-trans">₱ 0.00</span>
+                </div>
+                <div class="breakdown-row">
+                  <span>Accommodation</span>
+                  <span id="summary-breakdown-acc">₱ 0.00</span>
+                </div>
+                <div class="breakdown-row">
+                  <span>Food</span>
+                  <span id="summary-breakdown-food">₱ 0.00</span>
+                </div>
+                <div class="breakdown-row">
+                  <span>Activities</span>
+                  <span id="summary-breakdown-act">₱ 0.00</span>
+                </div>
+                <div class="breakdown-row highlight-row">
+                  <span>Travelers Count</span>
+                  <span id="summary-breakdown-count">1 person</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 7: TRAVEL PLAN SUMMARY (E17) ==================== -->
+    <section class="app-screen" id="section-summary">
+      <div class="screen-container">
+        <div class="summary-header-block">
+          <div>
+            <h1 class="page-title">Travel Plan Summary</h1>
+            <p class="page-subtitle">Review your favorites, day-by-day stops, and estimated trip budget.</p>
+          </div>
+          <div class="summary-header-actions">
+            <button class="btn btn-primary" id="btn-generate-summary">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"></path><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+              Generate summary
+            </button>
+            <button class="btn btn-outline" id="btn-print-summary" style="display: none;">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+              Print / Save PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Rendered Summary Container -->
+        <div class="card summary-report-card" id="summary-report-card" style="display: none;">
+          <!-- Section 1: Favorite Destinations -->
+          <div class="summary-block">
+            <h3 class="summary-block-title">Favorite destinations</h3>
+            <div class="summary-fav-tags" id="summary-fav-tags">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <!-- Section 2: Itinerary Breakdown -->
+          <div class="summary-block">
+            <h3 class="summary-block-title">Itinerary Stops</h3>
+            <div class="summary-itinerary-list" id="summary-itinerary-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <!-- Section 3: Budget Breakdown -->
+          <div class="summary-block">
+            <h3 class="summary-block-title">Budget</h3>
+            <div class="summary-budget-info">
+              <p class="summary-budget-line">
+                <span>Transportation, accommodation, food, activities:</span>
+                <strong id="summary-cost-subtotal">₱ 0.00</strong>
+              </p>
+              <p class="summary-budget-line total-line">
+                <span>Total:</span>
+                <strong class="text-primary" id="summary-cost-total">₱ 0.00</strong>
+              </p>
+              <p class="summary-budget-line per-person-line">
+                <span>Per traveler (<span id="summary-cost-travelers">1</span> person):</span>
+                <strong id="summary-cost-per-person">₱ 0.00</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="summary-empty-state">
+          <div class="empty-icon">📋</div>
+          <h3 class="empty-title">Nothing to summarize yet</h3>
+          <p class="empty-text">Add favorites, itinerary stops, or budget entries, then click "Generate summary".</p>
+          <button class="btn btn-outline" data-section="explore">Start Exploring Places</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== SCREEN 3: DESTINATION DETAILS MODAL (E6, E7, E8, E10) ==================== -->
+  <div class="modal-overlay" id="destination-modal" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Close Button (E7) -->
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">&times;</button>
+        
+        <!-- Modal Top Image Banner -->
+        <div class="modal-image-wrap">
+          <img id="modal-img" src="" alt="Destination photo" class="modal-image">
+          <div class="modal-badge-row">
+            <span class="badge" id="modal-category">Category</span>
+            <span class="badge fee-badge" id="modal-fee">Fee: ₱ 0</span>
+          </div>
+        </div>
+
+        <!-- Modal Body Content -->
+        <div class="modal-body">
+          <h2 class="modal-title" id="modal-title">Destination Name</h2>
+          <p class="modal-location" id="modal-location">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span id="modal-location-text">Location</span>
+          </p>
+
+          <div class="modal-section">
+            <h4 class="modal-section-heading">About</h4>
+            <p class="modal-description" id="modal-description">Description text...</p>
+          </div>
+
+          <div class="modal-section">
+            <h4 class="modal-section-heading">Activities</h4>
+            <div class="modal-activities-tags" id="modal-activities">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Actions (E8, E10) -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="modal-fav-btn">
+            <svg class="heart-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span id="modal-fav-btn-text">Save to favorites</span>
+          </button>
+          <button type="button" class="btn btn-primary" id="modal-itinerary-btn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Add to itinerary
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Center -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/destinations.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
