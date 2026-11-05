@@ -97,9 +97,11 @@ Every interaction strictly satisfies the project's Event-Driven Programming spec
 | **E12** | Itinerary Planner | Click "Delete" on stop | `click` | `deleteStop(id)` | Removes stop from list and storage; updates stop counters. |
 | **E13** | Itinerary Planner | Click "Clear all" | `click` | `clearItinerary()` | Prompts user confirmation, clears all stops, updates storage, displays empty state. |
 | **E14** | Budget Calculator | Type in cost/traveler field | `input` | `calculateBudget()` | Live computation of Total and Per-Traveler amounts as user types. |
-| **E15** | Budget Calculator | Click "Save budget" | `click` | `saveBudget()` | Validates inputs, saves budget to `localStorage`, updates Home dashboard stat, displays green confirmation. |
-| **E16** | Budget Calculator | Click "Reset" | `click` | `resetBudget()` | Resets all input fields, sets totals to ₱ 0.00, clears stored budget, displays notification. |
-| **E17** | Plan Summary | Click "Generate summary" | `click` | `generateSummary()` | Aggregates favorites, chronological itinerary, and budget breakdown into consolidated report; shows print option. |
+| **E15** | Budget Calculator | Click Save budget | `click` | `validateBudget()`, `saveData()` | Empty, negative or non-numeric values show an error; a valid budget is saved with a success message. |
+| **E16** | Budget Calculator | Click Reset | `click` | `resetBudget()` | Fields return to 0 and the saved budget is cleared. |
+| **E17** | Plan Summary | Click Generate summary | `click` | `buildSummary()` | Summary shows favorites, itinerary and budget total, or an empty state. |
+
+> **Note**: `saveData()` writes favorites, itinerary and budget to `localStorage`. `loadData()` reads them back inside `init()`.
 
 ---
 
