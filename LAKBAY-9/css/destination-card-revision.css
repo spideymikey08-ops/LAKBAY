@@ -1,0 +1,428 @@
+/* ==========================================================================
+   Lakbay — Destination Travel Card
+   --------------------------------------------------------------------------
+   Full-bleed photo card inspired by the 21st.dev "card-7" travel card:
+   rounded image, bottom gradient, glass category badge, editorial title,
+   overview copy, and an action panel that slides in on hover / focus.
+   Adapted to keep every existing destination detail and both card actions.
+   Loaded after palette.css and night-mode.css so it can override their
+   !important surface rules without changing the swappable theme layer.
+   ========================================================================== */
+
+.destination-card.travel-card {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  height: 100%;
+  min-height: 430px;
+  padding: 0 !important;
+  overflow: hidden;
+  border: 0 !important;
+  border-radius: 22px !important;
+  background: #10352b !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 26px rgba(16, 59, 45, 0.14);
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.35s ease;
+}
+
+.destination-card.travel-card:hover,
+.destination-card.travel-card:focus-within {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 44px rgba(16, 59, 45, 0.26);
+}
+
+/* Photo + readability wash ------------------------------------------------ */
+.travel-card-img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.destination-card.travel-card:hover .travel-card-img,
+.destination-card.travel-card:focus-within .travel-card-img {
+  transform: scale(1.09);
+}
+
+.travel-card-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 22, 15, 0.12) 0%,
+    rgba(7, 22, 15, 0.50) 34%,
+    rgba(7, 22, 15, 0.92) 100%
+  );
+}
+
+.travel-card-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 430px;
+  padding: 1.5rem;
+}
+
+/* Top row: glass category icon + category pill ---------------------------- */
+.travel-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.travel-card-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(10, 30, 20, 0.38);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.travel-card-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.travel-card-category {
+  max-width: 66%;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(10, 30, 20, 0.42);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.94);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  line-height: 1.2;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.travel-card-planned {
+  position: absolute;
+  top: 6.9rem;
+  left: 1.5rem;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  background: var(--lime, #d6ef4a);
+  color: #10352b;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.travel-card-planned svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* Editorial copy ---------------------------------------------------------- */
+.travel-card-main {
+  margin-top: auto;
+  padding-bottom: 0.15rem;
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.destination-card.travel-card:hover .travel-card-main,
+.destination-card.travel-card:focus-within .travel-card-main {
+  transform: translateY(-10px);
+}
+
+.travel-card-title {
+  margin: 0 0 0.35rem;
+  color: #ffffff !important;
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.7rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+
+.travel-card-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 1rem;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.travel-card-subtitle svg {
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+}
+
+.travel-card-eyebrow {
+  margin: 0 0 0.4rem;
+  color: var(--lime, #d6ef4a);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.67rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+}
+
+.travel-card-desc {
+  display: -webkit-box;
+  margin: 0 0 0.85rem;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.83rem;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.travel-card-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.travel-card-fact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-size: 0.71rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.travel-card-fact svg {
+  flex: 0 0 auto;
+  width: 13px;
+  height: 13px;
+}
+
+.travel-card-fact--fee {
+  border-color: transparent;
+  background: var(--lime, #d6ef4a);
+  color: #10352b;
+}
+
+/* Sliding action panel ---------------------------------------------------- */
+.travel-card-reveal {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.9rem;
+  max-height: 0;
+  margin-top: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: max-height 0.45s ease, opacity 0.35s ease,
+    transform 0.45s cubic-bezier(0.23, 1, 0.32, 1), margin-top 0.35s ease;
+}
+
+.destination-card.travel-card:hover .travel-card-reveal,
+.destination-card.travel-card:focus-within .travel-card-reveal {
+  max-height: 120px;
+  margin-top: 1rem;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.travel-card-price {
+  display: block;
+  color: #ffffff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.15rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+}
+
+.travel-card-price-label {
+  display: block;
+  margin-top: 0.2rem;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.travel-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.travel-card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 0 0.95rem;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.travel-card-btn svg {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+}
+
+.travel-card-btn:hover {
+  transform: translateY(-1px);
+}
+
+.travel-card-btn-explore {
+  background: #ffffff;
+  color: #10352b;
+}
+
+.travel-card-btn-explore:hover {
+  background: var(--lime, #d6ef4a);
+}
+
+.travel-card-btn-add {
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+.travel-card-btn-add:hover {
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.travel-card-btn-add.is-added {
+  border-color: transparent;
+  background: var(--lime, #d6ef4a);
+  color: #10352b;
+}
+
+/* Touch devices have no hover: keep the actions permanently available. */
+@media (hover: none) {
+  .travel-card-reveal {
+    max-height: none;
+    margin-top: 1rem;
+    opacity: 1;
+    transform: none;
+  }
+
+  .destination-card.travel-card:hover .travel-card-main,
+  .destination-card.travel-card:focus-within .travel-card-main {
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .destination-card.travel-card,
+  .travel-card-body {
+    min-height: 400px;
+  }
+
+  .travel-card-body {
+    padding: 1.25rem;
+  }
+
+  .travel-card-title {
+    font-size: 1.5rem;
+  }
+
+  .travel-card-planned {
+    top: 6.5rem;
+    left: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .destination-card.travel-card,
+  .travel-card-img,
+  .travel-card-main,
+  .travel-card-reveal,
+  .travel-card-btn {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Light-mode readability fix
+   palette.css forces `p, li, label { color: var(--text-body) !important }`,
+   which turned the card's location, overview and price label dark green on a
+   dark photo. Re-assert the light text colours here (this file loads last).
+   -------------------------------------------------------------------------- */
+.destination-card.travel-card .travel-card-title,
+.destination-card.travel-card .travel-card-price,
+.destination-card.travel-card .travel-card-fact {
+  color: #ffffff !important;
+}
+
+.destination-card.travel-card .travel-card-subtitle {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.destination-card.travel-card .travel-card-desc {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.destination-card.travel-card .travel-card-price-label {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+.destination-card.travel-card .travel-card-eyebrow {
+  color: var(--lime, #d6ef4a) !important;
+}
+
+.destination-card.travel-card .travel-card-fact--fee,
+.destination-card.travel-card .travel-card-planned,
+.destination-card.travel-card .travel-card-btn-add.is-added {
+  color: #10352b !important;
+}
+
+.destination-card.travel-card .travel-card-btn-explore {
+  color: #10352b !important;
+}
+
+.destination-card.travel-card .travel-card-btn-add:not(.is-added) {
+  color: #ffffff !important;
+}
+
+/* Soft shadow keeps text legible over bright parts of a photo */
+.destination-card.travel-card .travel-card-title,
+.destination-card.travel-card .travel-card-subtitle,
+.destination-card.travel-card .travel-card-desc {
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+}
+
+/* Links inside cards (palette.css forces `a` to the dark primary colour) */
+.destination-card.travel-card a {
+  color: inherit !important;
+}

@@ -1,0 +1,545 @@
+/* ==========================================================================
+   Lakbay - NATURE EDITORIAL PALETTE (loaded last)
+   --------------------------------------------------------------------------
+   Forest green navigation, warm cream page, sage content sections,
+   muted olive details and a restrained lime accent.
+   Remove this file's <link> in index.template.html to revert to the base theme.
+   ========================================================================== */
+
+:root {
+  /* Core nature palette */
+  --forest: #164B38;
+  --deep-green: #103B2D;
+  --sage: #A9C5A7;
+  --light-sage: #DCE8CE;
+  --cream: #F5F2DF;
+  --lime: #D6EF4A;
+  --olive: #788D55;
+  /* Darker olive reserved for small text so it stays readable on cream/white. */
+  --olive-strong: #536638;
+
+  /* Mapped theme tokens */
+  --primary: #164B38;
+  --primary-hover: #103B2D;
+  --primary-light: #DCE8CE;
+  --primary-dark: #0B2A20;
+
+  --accent-sage: #A9C5A7;
+  --accent-soft: #DCE8CE;
+  --accent-mint: #788D55;
+
+  --bg-main: #F5F2DF;
+  --bg-gradient: #F5F2DF;
+  --bg-card: #FFFFFF;
+  --bg-muted: #DCE8CE;
+  --surface-input: #FFFFFF;
+
+  --text-main: #103B2D;
+  --text-body: #1E3428;
+  --text-muted: #3D5145;
+  --text-light: #536638;
+
+  --border-color: rgba(22, 75, 56, 0.16);
+  --border-focus: #164B38;
+
+  --success: #164B38;
+  --success-light: #DCE8CE;
+  --warning: #788D55;
+  --warning-light: #F5F2DF;
+
+  --shadow-sm: 0 3px 10px rgba(16, 59, 45, 0.05);
+  --shadow-md: 0 10px 26px rgba(16, 59, 45, 0.08);
+  --shadow-lg: 0 18px 40px rgba(16, 59, 45, 0.11);
+  --shadow-xl: 0 28px 60px rgba(16, 59, 45, 0.14);
+  --shadow-pill: 0 6px 18px rgba(16, 59, 45, 0.12);
+}
+
+/* ------------------------------- Page & type ----------------------------- */
+html,
+body {
+  background: var(--bg-main) !important;
+  background-attachment: scroll !important;
+  color: var(--text-body) !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+body {
+  font-size: 15px;
+}
+
+h1, h2, h3, h4, h5, h6,
+.page-title,
+.card-title,
+.modal-title,
+.confirm-title,
+.summary-block-title,
+.day-section-title,
+.stop-dest-title {
+  color: var(--text-main) !important;
+}
+
+.editorial-title,
+.section-title.editorial-title,
+.page-title.editorial-title,
+.explore-header .editorial-title,
+.trip-setup-head h2,
+.card-title,
+.experience-card h3,
+.summary-block-title {
+  font-family: 'DM Serif Display', Georgia, serif !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.display-title,
+.hero-display,
+.final-cta-title,
+.hero-floating-note strong,
+.experience-index {
+  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif !important;
+  font-weight: 800 !important;
+}
+
+.hero-display,
+.display-title {
+  color: var(--primary) !important;
+}
+
+p, li, td, th, label,
+.page-subtitle,
+.section-subtitle,
+.card-desc,
+.tip-desc,
+.experience-card p,
+.modal-detail-text,
+.modal-info-val,
+.summary-label,
+.summary-value {
+  color: var(--text-body) !important;
+}
+
+a,
+.link-btn {
+  color: var(--primary) !important;
+}
+
+/* --------------------------- Readability fixes --------------------------- */
+/* These must follow the broad h1–h6 and p rules above so overlay copy stays light. */
+.experience-card h3 {
+  color: var(--cream) !important;
+}
+
+.experience-card p {
+  color: rgba(245, 242, 223, 0.94) !important;
+}
+
+.final-cta-title {
+  color: var(--lime) !important;
+}
+
+.final-cta-text {
+  color: rgba(245, 242, 223, 0.94) !important;
+}
+
+/* Muted olive is decorative; small text uses the darker contrast-safe variant. */
+.visit-duration,
+.badge-fee-free,
+.travel-hop,
+.day-section-date,
+.stop-time-end,
+.summary-report-card small,
+.summary-report-card small span {
+  color: var(--olive-strong) !important;
+}
+
+/* --------------------------- Sidebar / navigation ------------------------ */
+.sidebar,
+.navbar {
+  background: var(--deep-green) !important;
+  color: var(--cream) !important;
+  box-shadow: 4px 0 24px rgba(16, 59, 45, 0.14) !important;
+}
+
+.brand-link,
+.brand-logo,
+.brand strong,
+.brand .brand-text,
+.brand-icon-wrap,
+.brand-icon {
+  color: var(--cream) !important;
+}
+
+.brand-icon,
+.brand-icon-wrap {
+  background: rgba(245, 242, 223, 0.12) !important;
+}
+
+.brand .brand-tag {
+  background: var(--lime) !important;
+  color: var(--deep-green) !important;
+}
+
+.sidebar nav button.nav-item,
+.sidebar nav .nav-item {
+  color: rgba(245, 242, 223, 0.78) !important;
+}
+
+.sidebar nav .nav-item:hover {
+  background: rgba(169, 197, 167, 0.14) !important;
+  color: var(--cream) !important;
+}
+
+.sidebar nav .nav-item.active {
+  background: var(--lime) !important;
+  color: var(--deep-green) !important;
+  box-shadow: 0 6px 18px rgba(11, 42, 32, 0.24) !important;
+}
+
+.sidebar nav .nav-item.active .nav-icon {
+  color: var(--deep-green) !important;
+}
+
+.sidebar-footer {
+  border-top-color: rgba(245, 242, 223, 0.16) !important;
+}
+
+.sidebar-location-pill {
+  color: rgba(245, 242, 223, 0.72) !important;
+}
+
+.mobile-toggle span,
+.appearance-toggle {
+  background-color: var(--cream) !important;
+  color: var(--deep-green) !important;
+}
+
+.appearance-toggle {
+  background: rgba(245, 242, 223, 0.14) !important;
+  border-color: rgba(245, 242, 223, 0.3) !important;
+  color: var(--cream) !important;
+}
+
+.appearance-toggle:hover {
+  background: rgba(245, 242, 223, 0.24) !important;
+  color: var(--cream) !important;
+}
+
+/* --------------------------- Buttons & CTAs ------------------------------ */
+.btn-primary,
+.btn-hero-white,
+.btn-sidebar-cta,
+.modal-primary-btn,
+.confirm-btn,
+.btn-confirm,
+.btn-export,
+.btn-copy,
+#modal-itinerary-btn,
+#confirm-ok-btn {
+  background-color: var(--primary) !important;
+  background: var(--primary) !important;
+  color: var(--cream) !important;
+  border: 1.5px solid var(--primary) !important;
+  font-weight: 800 !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.btn-primary:hover,
+.btn-hero-white:hover,
+.modal-primary-btn:hover,
+.confirm-btn:hover,
+.btn-confirm:hover,
+#modal-itinerary-btn:hover,
+#confirm-ok-btn:hover {
+  background-color: var(--deep-green) !important;
+  background: var(--deep-green) !important;
+  border-color: var(--deep-green) !important;
+  color: var(--cream) !important;
+}
+
+.btn-sidebar-cta,
+.btn-sidebar-cta:hover {
+  background: var(--lime) !important;
+  border-color: var(--lime) !important;
+  color: var(--deep-green) !important;
+}
+
+.btn-outline,
+.btn-hero-glass {
+  background-color: transparent !important;
+  background: transparent !important;
+  color: var(--primary) !important;
+  border: 2px solid var(--primary) !important;
+}
+
+.btn-outline:hover {
+  background: var(--light-sage) !important;
+  color: var(--deep-green) !important;
+  border-color: var(--primary) !important;
+}
+
+.btn-hero-glass {
+  color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+.btn-hero-glass:hover {
+  background: var(--light-sage) !important;
+  color: var(--deep-green) !important;
+}
+
+.btn-danger,
+.btn-outline-danger {
+  color: #B3261E !important;
+}
+
+.btn-danger {
+  background-color: #B3261E !important;
+  border-color: #B3261E !important;
+  color: #FFFFFF !important;
+}
+
+/* Active pills / chips use the lime accent */
+.chip.active,
+.price-chip.active,
+.filter-chip.active,
+.rating-chip.active,
+.inactive-chip.active,
+.preset-btn.active,
+.btn-preset.active,
+.itin-tab-pill.active,
+.day-tab-pill.active,
+.duration-chip.active,
+.toggle-chip.active,
+.sugg-chip:hover,
+.btn-icon-action:hover,
+.day-add-stop-btn:hover,
+.map-popup-btn,
+.btn-gmaps:hover {
+  background: var(--lime) !important;
+  background-color: var(--lime) !important;
+  color: var(--deep-green) !important;
+  border-color: var(--lime) !important;
+  font-weight: 800 !important;
+}
+
+.chip,
+.price-chip,
+.sugg-chip,
+.duration-chip,
+.day-tab-pill,
+.itin-tab-pill,
+.preset-btn,
+.btn-preset {
+  color: var(--deep-green) !important;
+}
+
+/* ---------------------------- Cards & surfaces --------------------------- */
+.card,
+.destination-card,
+.spotlight-card,
+.welcome-card,
+.tip-card,
+.quick-add-popover,
+.modal-dialog,
+.modal-footer,
+.confirm-dialog,
+.stop-editor-modal,
+.itinerary-stop-card,
+.budget-totals-card,
+.budget-selector-card,
+.budget-confirmed-card,
+.tracker-stat-box,
+.alloc-item,
+.day-meta-pill,
+.duration-chip,
+.empty-day-banner,
+.destination-dropdown-panel,
+.destination-option,
+.stop-dur-pill,
+.fee-badge,
+.budget-comparison-box,
+.day-subtotal-bar,
+.itin-tab-pill,
+.preset-btn,
+.btn-preset,
+.chip,
+.price-chip,
+.sugg-chip,
+.spotlight-image-wrap,
+.summary-report-card,
+.stop-editor-modal .modal-dialog {
+  background-color: var(--bg-card) !important;
+  background: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-body) !important;
+}
+
+.trip-setup-card,
+.hero-eyebrow,
+.budget-comparison-box {
+  background: var(--bg-muted) !important;
+  border-color: var(--border-color) !important;
+}
+
+.experience-card {
+  border-color: var(--border-color) !important;
+}
+
+/* Inputs stay crisp and legible on cream / sage cards */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+input[type="search"],
+select,
+textarea,
+.form-input,
+.form-select,
+.search-input,
+.sort-select,
+.destination-search,
+.budget-box-input,
+.budget-range-input,
+.planner-field-search input,
+.planner-field-select select,
+.trip-setup-field input,
+.trip-setup-field select {
+  background-color: var(--surface-input) !important;
+  color: var(--text-body) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-light) !important;
+}
+
+/* --------------------------- Borders & dividers -------------------------- */
+hr,
+.separator,
+.planner-divider,
+.day-section-header,
+.modal-tip-box,
+.sidebar-footer,
+.summary-divider,
+.summary-divider-sm,
+.budget-comparison-box,
+.floating-planner-bar {
+  border-color: var(--border-color) !important;
+}
+
+/* -------------------------------- Badges --------------------------------- */
+.badge,
+.badge-nature--parks,
+.badge-nature-parks,
+.badge-planned,
+.rating-badge,
+.stop-status-badge,
+.comparison-badge,
+.badge-fee-free,
+.badge-fee-paid {
+  color: var(--deep-green) !important;
+  border-color: var(--border-color) !important;
+}
+
+.badge-culture--heritage,
+.badge-food--shopping,
+.badge-viewpoints,
+.badge-museums--arts,
+.badge-fee-paid {
+  background: var(--light-sage) !important;
+  color: var(--deep-green) !important;
+  border-color: var(--border-color) !important;
+}
+
+.badge-fee-free {
+  background: var(--cream) !important;
+  color: var(--olive-strong) !important;
+}
+
+/* ------------------------- Hero / dark overlays -------------------------- */
+.hero-photo-caption,
+.final-cta-content,
+.final-cta-content .section-kicker,
+.final-cta-content .section-kicker::before {
+  color: var(--cream) !important;
+}
+
+.hero-photo-caption {
+  background: rgba(16, 59, 45, 0.9) !important;
+}
+
+.hero-floating-note {
+  background: var(--lime) !important;
+  color: var(--deep-green) !important;
+}
+
+.hero-floating-note strong,
+.hero-floating-note span {
+  color: var(--deep-green) !important;
+}
+
+/* -------------------------------- Toasts --------------------------------- */
+.toast-success,
+.toast-info {
+  background-color: var(--deep-green) !important;
+  color: var(--cream) !important;
+}
+
+.toast-danger {
+  background-color: #B3261E !important;
+  color: #FFFFFF !important;
+}
+
+.toast-undo-btn {
+  background: var(--lime) !important;
+  border-color: var(--lime) !important;
+  color: var(--deep-green) !important;
+}
+
+.toast-undo-btn:hover {
+  background: #C4DD3F !important;
+  border-color: #C4DD3F !important;
+}
+/* ==========================================================================
+   FIX FOR DESTINATION CARDS OVER IMAGES
+   Force text to be white/cream on top of dark image backgrounds
+   ========================================================================== */
+
+/* Force the Title, Location, and Description to be cream */
+.destination-card .card-content h3.card-title,
+.destination-card .card-content .card-location,
+.destination-card .card-content .card-desc,
+.destination-card .card-content p {
+  color: var(--cream) !important;
+}
+
+/* Force the small badges (Est time, Rating) text to be cream */
+.destination-card .card-content .badge,
+.destination-card .card-content .fee-badge,
+.destination-card .card-content .rating-badge {
+  color: var(--cream) !important;
+  background: rgba(16, 59, 45, 0.65) !important; /* Semi-transparent dark background for pills */
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Keep the "FREE" text inside the fee badge bright lime so it pops */
+.destination-card .card-content .fee-badge.badge-fee-free {
+  color: var(--lime) !important;
+}
+
+/* If the "In Itinerary" badge has a lime background, make sure its text is dark green */
+.destination-card .card-planned-indicator {
+  color: var(--deep-green) !important;
+}
+
+/* -------------------------------- Print ---------------------------------- */
+@media print {
+  html,
+  body,
+  #section-summary,
+  .summary-report-card {
+    background: #FFFFFF !important;
+    color: #103B2D !important;
+  }
+}

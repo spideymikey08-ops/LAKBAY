@@ -1,0 +1,161 @@
+    <!-- ==================== SCREEN 1: HOME - EDITORIAL LANDING ==================== -->
+    <section class="app-screen active" id="section-home">
+      <div class="screen-container">
+
+        <!-- 1. HERO — Discover Baguio -->
+        <div class="editorial-hero">
+          <div class="hero-copy">
+            <span class="hero-eyebrow">
+              <span class="eyebrow-dot"></span>
+              The Summer Capital of the Philippines
+            </span>
+            <h1 class="hero-display">
+              <span class="hero-line">Find your way</span>
+              <span class="hero-line">to <span class="hero-highlight">Baguio.</span></span>
+            </h1>
+            <p class="hero-copy-text">
+              A little escape to the City of Pines. Discover places, plan your days, and make every moment count.
+            </p>
+            <div class="hero-actions">
+              <button type="button" class="btn btn-primary btn-lg" data-section="itinerary">
+                Plan Your Trip
+              </button>
+              <button type="button" class="btn btn-outline btn-lg" data-section="explore">
+                Discover Baguio
+              </button>
+            </div>
+          </div>
+
+          <div class="hero-photo-col">
+            <div class="hero-photo-frame">
+              <img src="assets/images/mines-view-park.jpeg" alt="Pine trees and mountain view in Baguio City" fetchpriority="high">
+              <span class="hero-photo-caption">16° north · 1,540 m above sea level</span>
+            </div>
+            <div class="hero-floating-note">
+              <strong>21</strong>
+              <span>Curated places</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. FEATURED DESTINATIONS -->
+        <div class="editorial-section">
+          <div class="editorial-section-head">
+            <div>
+              <span class="section-kicker">Explore Destinations</span>
+              <h2 class="editorial-title">Places worth the detour.</h2>
+              <p class="editorial-lead">A small selection of the parks, ridges, gardens, and cultural corners waiting for you.</p>
+            </div>
+            <button type="button" class="link-btn" data-section="explore">See all 21 destinations &rarr;</button>
+          </div>
+
+          <div class="featured-slider">
+            <button type="button" class="featured-slider-arrow featured-slider-prev" id="featured-prev" aria-label="Previous destination">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+
+            <div class="featured-slider-viewport" id="featured-slider-viewport">
+              <div class="home-featured-grid featured-slider-track" id="home-featured-grid">
+                <!-- Dynamically populated by JS -->
+              </div>
+            </div>
+
+            <button type="button" class="featured-slider-arrow featured-slider-next" id="featured-next" aria-label="Next destination">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+
+            <div class="featured-slider-footer">
+              <span class="featured-slider-counter" id="featured-counter">1/6</span>
+              <div class="featured-carousel-dots" id="featured-carousel-dots" role="tablist" aria-label="Featured destinations slider pagination">
+                <!-- Dynamically populated by JS -->
+              </div>
+            </div>
+
+            <p class="featured-slider-caption" id="featured-caption"></p>
+          </div>
+        </div>
+
+        <!-- 3. EXPERIENCE BAGUIO -->
+        <div class="editorial-section">
+          <div class="editorial-section-head">
+            <div>
+              <span class="section-kicker">Experience Baguio</span>
+              <h2 class="editorial-title">The city is best tasted slowly.</h2>
+              <p class="editorial-lead">Follow the small rituals that make a highland visit feel like your own.</p>
+            </div>
+          </div>
+
+          <div class="experience-grid">
+            <article class="experience-card">
+              <img src="assets/images/session-road.jpeg" alt="Cafes and restaurants along Session Road" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">01 / FLAVORS</span>
+                <h3>Local food &amp; restaurants</h3>
+                <p>Warm soups, raisin bread, and Cordilleran dishes served in homegrown kitchens.</p>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <img src="assets/images/camp-john-hay.jpg" alt="Pine forest cafe setting in Camp John Hay" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">02 / SLOW MOMENTS</span>
+                <h3>Cafes &amp; coffee shops</h3>
+                <p>Benguet coffee, thick hot chocolate, and a window seat beneath the pines.</p>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <img src="assets/images/botanical-garden.jpeg" alt="Green gardens in Baguio" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">03 / THE FIELDS</span>
+                <h3>Strawberry picking</h3>
+                <p>Head to the outskirts for cool air, sweet berries, and a basket worth bringing home.</p>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <img src="assets/images/night-market.jpeg" alt="Night market stalls in Baguio" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">04 / AFTER DARK</span>
+                <h3>Shopping &amp; local markets</h3>
+                <p>From ukay finds on Harrison Road to handcrafted souvenirs and jars of ube jam.</p>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <img src="assets/images/tam-awan-village.jpeg" alt="Traditional Ifugao huts at Tam-Awan Village" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">05 / HERITAGE</span>
+                <h3>Cultural attractions</h3>
+                <p>Ancient stonework, living traditions, and galleries shaped by Cordilleran artists.</p>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <img src="assets/images/sky-ranch.jpeg" alt="Open mountain terrain near Baguio" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">06 / OUTDOORS</span>
+                <h3>Nature &amp; open air</h3>
+                <p>Pine trails, garden paths, and ridge views made for unhurried mornings.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- 4. FINAL CTA -->
+        <div class="final-cta">
+          <img src="assets/images/camp-john-hay.jpg" alt="Pine trees in the Baguio highlands" loading="lazy">
+          <div class="final-cta-content">
+            <span class="section-kicker">Your Baguio Story Starts Here</span>
+            <h2 class="final-cta-title">Your Next Chapter Begins in Baguio.</h2>
+            <p class="final-cta-text">
+              Build your itinerary, discover hidden gems, and make your highland getaway unforgettable.
+            </p>
+            <button type="button" class="btn btn-primary btn-lg" data-section="itinerary">
+              Create My Itinerary
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>

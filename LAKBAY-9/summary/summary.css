@@ -1,0 +1,256 @@
+/* Summary Module Styles */
+
+/* ==========================================================================
+   Screen 7: Summary View & Report
+   ========================================================================== */
+.summary-header-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.summary-report-card {
+  padding: 2.25rem;
+  border-top: 4px solid var(--primary);
+}
+
+.summary-trip-meta-header {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+}
+
+.summary-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.summary-meta-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.summary-meta-value {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.summary-block {
+  margin: 1.5rem 0;
+}
+
+.summary-block-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+}
+
+.summary-divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 1.5rem 0;
+}
+
+.summary-divider-sm {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 0.5rem 0;
+}
+
+.summary-itinerary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.summary-day-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.summary-day-header {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--primary);
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.summary-itinerary-item {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.4rem 0;
+}
+
+.summary-time-tag {
+  font-weight: 800;
+  color: var(--primary);
+  font-size: 0.825rem;
+  background-color: var(--primary-light);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.summary-itinerary-text {
+  font-size: 0.925rem;
+  color: var(--text-main);
+}
+
+.summary-budget-table {
+  background-color: var(--bg-main);
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.summary-budget-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35rem 0;
+  font-size: 0.925rem;
+  color: var(--text-muted);
+}
+
+.summary-budget-row strong {
+  color: var(--text-main);
+  font-weight: 800;
+}
+
+.summary-budget-row.total-line {
+  padding-top: 0.5rem;
+  font-size: 1.05rem;
+  color: var(--text-main);
+}
+
+.summary-budget-row.total-line strong {
+  font-size: 1.4rem;
+  color: var(--primary);
+}
+
+.summary-budget-row.per-person-line {
+  font-size: 0.85rem;
+}
+
+.summary-print-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+
+/* ==========================================
+   Clean Summary Print Layout
+   ========================================== */
+@page {
+  size: A4 portrait;
+  margin: 15mm;
+}
+
+@media print {
+  html, body {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #183315 !important;
+    font-size: 11pt !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  #section-summary,
+  #section-summary * {
+    visibility: visible !important;
+  }
+
+  #section-summary {
+    display: block !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  #section-summary .screen-container {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .sidebar,
+  .navbar,
+  .summary-print-container,
+  .toast-container,
+  button {
+    display: none !important;
+  }
+
+  .app-main {
+    margin-left: 0 !important;
+    padding: 0 !important;
+  }
+
+  .print-brand {
+    display: block !important;
+    font-size: 13pt !important;
+    font-weight: 800 !important;
+    color: #275024 !important;
+    margin-bottom: 10px !important;
+    border-bottom: 2px solid #275024 !important;
+    padding-bottom: 6px !important;
+  }
+
+  .summary-report-card {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .summary-block {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.print-brand {
+  display: none;
+}
+
+
+@media (max-width: 992px) {
+  .summary-trip-meta-header {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

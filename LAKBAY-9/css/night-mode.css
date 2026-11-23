@@ -1,0 +1,221 @@
+/* ==========================================================================
+   Lakbay - NIGHT MODE THEME
+   --------------------------------------------------------------------------
+   Activated by data-theme="night" on <html>, set by the sidebar appearance
+   toggle. Loaded after palette.css so it can safely override day colors.
+   ========================================================================== */
+
+:root[data-theme="night"] {
+  --primary: #A9C5A7;
+  --primary-hover: #D6EF4A;
+  --primary-light: #1E4434;
+  --primary-dark: #081C14;
+
+  --accent-sage: #A9C5A7;
+  --accent-soft: #173A2B;
+  --accent-mint: #788D55;
+  --olive-strong: #D6EF4A;
+
+  --bg-main: #0B2018;
+  --bg-gradient: #0B2018;
+  --bg-card: #123528;
+  --bg-muted: #173F2F;
+  --surface-input: #0D2C20;
+
+  --text-main: #F5F2DF;
+  --text-body: #DCE8CE;
+  --text-muted: #B9CFBC;
+  --text-light: #8FA893;
+
+  --border-color: rgba(169, 197, 167, 0.20);
+  --border-focus: #D6EF4A;
+
+  --success: #A9C5A7;
+  --success-light: #173F2F;
+  --warning: #D6EF4A;
+  --warning-light: #2C3A1C;
+
+  --shadow-sm: 0 3px 10px rgba(0, 0, 0, 0.22);
+  --shadow-md: 0 10px 26px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.34);
+  --shadow-xl: 0 28px 60px rgba(0, 0, 0, 0.4);
+  --shadow-pill: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="night"] html,
+[data-theme="night"] body {
+  background: var(--bg-main) !important;
+  color: var(--text-body) !important;
+}
+
+[data-theme="night"] .sidebar,
+[data-theme="night"] .navbar {
+  background: #071B13 !important;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.35) !important;
+}
+
+[data-theme="night"] .sidebar nav .nav-item {
+  color: rgba(220, 232, 206, 0.76) !important;
+}
+
+[data-theme="night"] .sidebar nav .nav-item:hover {
+  background: rgba(169, 197, 167, 0.12) !important;
+  color: var(--cream) !important;
+}
+
+[data-theme="night"] .sidebar nav .nav-item.active {
+  background: var(--lime) !important;
+  color: var(--deep-green) !important;
+}
+
+[data-theme="night"] .appearance-toggle {
+  background: rgba(214, 239, 74, 0.16) !important;
+  border-color: rgba(214, 239, 74, 0.55) !important;
+  color: var(--lime) !important;
+}
+
+[data-theme="night"] .hero-display,
+[data-theme="night"] .display-title,
+[data-theme="night"] .editorial-title,
+[data-theme="night"] .section-title.editorial-title,
+[data-theme="night"] .page-title.editorial-title,
+[data-theme="night"] h1,
+[data-theme="night"] h2,
+[data-theme="night"] h3,
+[data-theme="night"] h4 {
+  color: var(--text-main) !important;
+}
+
+[data-theme="night"] .hero-copy-text,
+[data-theme="night"] .editorial-lead,
+[data-theme="night"] p,
+[data-theme="night"] .page-subtitle,
+[data-theme="night"] .section-subtitle {
+  color: var(--text-body) !important;
+}
+
+[data-theme="night"] .btn-primary,
+[data-theme="night"] .btn-hero-white,
+[data-theme="night"] .modal-primary-btn,
+[data-theme="night"] .confirm-btn,
+[data-theme="night"] .btn-confirm {
+  background: var(--lime) !important;
+  border-color: var(--lime) !important;
+  color: var(--deep-green) !important;
+}
+
+[data-theme="night"] .btn-primary:hover,
+[data-theme="night"] .btn-hero-white:hover {
+  background: #C4DD3F !important;
+  border-color: #C4DD3F !important;
+  color: var(--deep-green) !important;
+}
+
+[data-theme="night"] .btn-outline,
+[data-theme="night"] .btn-hero-glass {
+  border-color: var(--sage) !important;
+  color: var(--sage) !important;
+}
+
+[data-theme="night"] .btn-outline:hover {
+  background: rgba(169, 197, 167, 0.14) !important;
+  color: var(--cream) !important;
+  border-color: var(--sage) !important;
+}
+
+[data-theme="night"] .chip.active,
+[data-theme="night"] .price-chip.active,
+[data-theme="night"] .preset-btn.active,
+[data-theme="night"] .btn-preset.active,
+[data-theme="night"] .itin-tab-pill.active,
+[data-theme="night"] .day-tab-pill.active,
+[data-theme="night"] .duration-chip.active,
+[data-theme="night"] .toggle-chip.active {
+  background: var(--lime) !important;
+  color: var(--deep-green) !important;
+  border-color: var(--lime) !important;
+}
+
+[data-theme="night"] .card,
+[data-theme="night"] .destination-card,
+[data-theme="night"] .spotlight-card,
+[data-theme="night"] .welcome-card,
+[data-theme="night"] .tip-card,
+[data-theme="night"] .modal-dialog,
+[data-theme="night"] .confirm-dialog,
+[data-theme="night"] .itinerary-stop-card,
+[data-theme="night"] .budget-selector-card,
+[data-theme="night"] .budget-confirmed-card,
+[data-theme="night"] .summary-report-card,
+[data-theme="night"] .stop-editor-modal .modal-dialog {
+  background: var(--bg-card) !important;
+  color: var(--text-body) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="night"] .trip-setup-card,
+[data-theme="night"] .hero-eyebrow,
+[data-theme="night"] .budget-comparison-box {
+  background: var(--bg-muted) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="night"] input[type="text"],
+[data-theme="night"] input[type="number"],
+[data-theme="night"] input[type="date"],
+[data-theme="night"] input[type="time"],
+[data-theme="night"] input[type="search"],
+[data-theme="night"] select,
+[data-theme="night"] textarea,
+[data-theme="night"] .form-input,
+[data-theme="night"] .form-select,
+[data-theme="night"] .search-input,
+[data-theme="night"] .sort-select,
+[data-theme="night"] .destination-search,
+[data-theme="night"] .budget-box-input,
+[data-theme="night"] .trip-setup-field input,
+[data-theme="night"] .trip-setup-field select {
+  background-color: var(--surface-input) !important;
+  color: var(--cream) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="night"] input::placeholder,
+[data-theme="night"] textarea::placeholder {
+  color: var(--text-light) !important;
+}
+
+[data-theme="night"] .hero-photo-caption {
+  background: rgba(7, 27, 19, 0.92) !important;
+}
+
+[data-theme="night"] .hero-floating-note {
+  background: var(--lime) !important;
+  color: var(--deep-green) !important;
+}
+
+[data-theme="night"] .experience-card::after {
+  background: linear-gradient(180deg, rgba(7, 27, 19, 0.25) 0%, rgba(7, 27, 19, 0.86) 100%);
+}
+
+[data-theme="night"] .final-cta::after {
+  background: linear-gradient(90deg, rgba(7, 27, 19, 0.96) 0%, rgba(7, 27, 19, 0.82) 55%, rgba(7, 27, 19, 0.45) 100%);
+}
+
+[data-theme="night"] .toast-success,
+[data-theme="night"] .toast-info {
+  background-color: #1B4A38 !important;
+  color: var(--cream) !important;
+}
+
+@media print {
+  html,
+  body,
+  [data-theme="night"] html,
+  [data-theme="night"] body,
+  #section-summary,
+  .summary-report-card {
+    background: #FFFFFF !important;
+    color: #103B2D !important;
+  }
+}

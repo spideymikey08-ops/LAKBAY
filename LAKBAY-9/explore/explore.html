@@ -1,0 +1,108 @@
+    <!-- ==================== SCREEN 2: EXPLORE ==================== -->
+    <section class="app-screen" id="section-explore">
+      <div class="screen-container">
+        <div class="explore-header">
+          <div>
+            <span class="section-kicker">Explore Destinations</span>
+            <h1 class="page-title editorial-title">Explore Baguio Destinations</h1>
+            <p class="page-subtitle">Search, filter by category or price, and discover the parks, ridges, gardens, and cultural corners that make the City of Pines worth wandering.</p>
+          </div>
+        </div>
+
+        <!-- Search & Filters -->
+        <div class="explore-toolbar">
+          <div class="explore-search-row">
+            <div class="search-bar-wrap">
+              <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input 
+                type="text" 
+                id="search-input" 
+                class="search-input" 
+                placeholder="Search by destination name, activity, or location..."
+                autocomplete="off"
+              >
+              <button type="button" class="search-clear-btn" id="search-clear-btn" aria-label="Clear search" style="display: none;">&times;</button>
+            </div>
+
+            <div class="explore-secondary-actions">
+              <button type="button" class="btn btn-sm btn-outline" id="btn-toggle-explore-map" title="Toggle interactive Baguio City map">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+                <span id="btn-toggle-explore-map-text">Show Map</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="explore-controls-row">
+            <div class="filter-chips-row">
+              <div class="category-chips" id="category-chips-container">
+                <button type="button" class="chip active" data-category="All">All</button>
+                <button type="button" class="chip" data-category="Nature &amp; Parks">Nature &amp; Parks</button>
+                <button type="button" class="chip" data-category="Culture &amp; Heritage">Culture &amp; Heritage</button>
+                <button type="button" class="chip" data-category="Food &amp; Shopping">Food &amp; Shopping</button>
+                <button type="button" class="chip" data-category="Viewpoints">Viewpoints</button>
+                <button type="button" class="chip" data-category="Museums &amp; Arts">Museums &amp; Arts</button>
+              </div>
+            </div>
+
+            <div class="compact-filters">
+              <label class="sr-only" for="price-filter-select">Entry fee</label>
+              <select id="price-filter-select" class="compact-select">
+                <option value="all">Entry fee</option>
+                <option value="free">Free</option>
+                <option value="50">Under &#8369;50</option>
+                <option value="100">Under &#8369;100</option>
+              </select>
+
+              <label class="sr-only" for="filter-rating">Rating</label>
+              <select id="filter-rating" class="compact-select">
+                <option value="all">Rating</option>
+                <option value="4.7">4.7+</option>
+                <option value="4.8">4.8+</option>
+              </select>
+
+              <label class="sr-only" for="sort-dropdown">Sort</label>
+              <select id="sort-dropdown" class="compact-select">
+                <option value="name-asc">Sort: Name A-Z</option>
+                <option value="name-desc">Sort: Name Z-A</option>
+                <option value="rating-desc">Sort: Highest rated</option>
+                <option value="fee-asc">Sort: Lowest fee</option>
+                <option value="fee-desc">Sort: Highest fee</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Map Container (Collapsible / Toggleable) -->
+        <div class="explore-map-container" id="explore-map-container" style="display: none;">
+          <div class="map-header">
+            <div>
+              <h3 class="map-title">&#128506;&#65039; Baguio City Interactive Explorer Map</h3>
+              <p class="map-subtitle">Click pins to inspect destinations, check area clusters, or schedule stops.</p>
+            </div>
+            <span class="map-badge">21 Pinned Spots</span>
+          </div>
+          <div id="baguio-map" class="baguio-leaflet-map" role="region" aria-label="Interactive map of Baguio City tourist destinations"></div>
+        </div>
+
+        <!-- Results Counter -->
+        <div class="results-meta">
+          <span id="results-count-text">Showing 21 destinations</span>
+          <span class="results-meta-rule" aria-hidden="true"></span>
+        </div>
+
+        <!-- Destination Cards Gallery -->
+        <div class="cards-grid" id="explore-cards-grid">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <!-- Empty State for Search / Filter -->
+        <div class="empty-state" id="explore-empty-state" style="display: none;">
+          <div class="empty-icon-wrap">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </div>
+          <h3 class="empty-title">No destinations match your criteria</h3>
+          <p class="empty-text">Try adjusting your keywords, selecting "All" categories, or resetting price filters.</p>
+          <button type="button" class="btn btn-outline" id="btn-reset-explore-filters">Reset Filters</button>
+        </div>
+      </div>
+    </section>
