@@ -1,0 +1,56 @@
+    <!-- ==================== ADD / EDIT ITINERARY STOP MODAL (RIGHT SIDE DRAWER) ==================== -->
+  <div class="modal-overlay modal-side" id="stop-editor-modal" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
+    <div class="modal-backdrop" id="stop-editor-backdrop"></div>
+    <div class="modal-dialog modal-dialog-drawer">
+      <div class="modal-content">
+
+        <!-- Pinned drawer header -->
+        <div class="modal-header drawer-header">
+          <div class="drawer-heading">
+            <span class="drawer-kicker">Trip Planner</span>
+            <h3 class="modal-title" id="stop-modal-title">Add Place to Itinerary</h3>
+          </div>
+          <button type="button" class="modal-close-btn drawer-close-btn" id="stop-modal-close" aria-label="Close dialog">&times;</button>
+        </div>
+
+        <form id="stop-editor-form" class="drawer-form" novalidate onsubmit="return false;">
+          <input type="hidden" id="stop-edit-id" value="">
+          <!-- Hidden picker keeps the existing destination lookup intact -->
+          <select id="stop-destination-select" class="form-select" style="display: none;" tabindex="-1" aria-hidden="true"></select>
+
+          <!-- Scrollable, evenly-spaced form body -->
+          <div class="drawer-form-body">
+
+            <div class="form-group">
+              <label for="stop-activity-input" class="form-label">Planned Activity <span class="form-optional">(Optional)</span></label>
+              <select id="stop-activity-input" class="form-select">
+                <option value="">Select an activity</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="stop-place-input" class="form-label">Where do you want to go?</label>
+              <input type="text" id="stop-place-input" class="form-input form-input-lg" list="stop-place-options"
+                     placeholder="Type a place or activity (e.g. SM Baguio)" autocomplete="off" required>
+              <datalist id="stop-place-options"></datalist>
+            </div>
+
+            <div class="form-group">
+              <label for="stop-day-select" class="form-label">Trip Day</label>
+              <select id="stop-day-select" class="form-select">
+                <!-- Populated dynamically: Day 1, Day 2... -->
+              </select>
+            </div>
+
+          </div>
+
+          <!-- Pinned drawer footer -->
+          <div class="modal-actions-footer drawer-form-footer">
+            <button type="button" class="btn btn-outline-danger drawer-remove-btn" id="btn-remove-stop" style="display: none;">Remove</button>
+            <button type="button" class="btn btn-outline" id="btn-cancel-stop-modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="btn-save-stop">Add to Itinerary</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

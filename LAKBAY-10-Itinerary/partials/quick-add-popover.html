@@ -1,0 +1,42 @@
+  <!-- ==================== QUICK-ADD ITINERARY POPOVER ==================== -->
+  <div class="quick-add-popover" id="quick-add-popover" hidden>
+    <div class="quick-add-header">
+      <h4 class="quick-add-title" id="quick-add-title">Add to itinerary</h4>
+      <button type="button" class="quick-add-close" id="quick-add-close" aria-label="Close popover">&times;</button>
+    </div>
+    <form id="quick-add-form" novalidate>
+      <input type="hidden" id="quick-add-dest-id">
+      <div class="form-group-sm">
+        <label for="quick-add-date" class="form-label-sm">Date</label>
+        <input type="date" id="quick-add-date" class="form-input form-input-sm" required>
+        <span class="field-error" id="error-quick-add-date"></span>
+      </div>
+      <div class="form-row-2col">
+        <div class="form-group-sm">
+          <label for="quick-add-time" class="form-label-sm">Time</label>
+          <input type="time" id="quick-add-time" class="form-input form-input-sm" value="09:00" required>
+          <span class="field-error" id="error-quick-add-time"></span>
+        </div>
+        <div class="form-group-sm">
+          <label for="quick-add-duration" class="form-label-sm">Duration</label>
+          <select id="quick-add-duration" class="form-select form-input-sm">
+            <option value="45">45 mins</option>
+            <option value="60">1 hour</option>
+            <option value="90" selected>1.5 hrs</option>
+            <option value="120">2 hours</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group-sm">
+        <label for="quick-add-activity" class="form-label-sm">
+          Activity <span class="form-optional">(Optional)</span>
+        </label>
+        <input type="text" id="quick-add-activity" class="form-input form-input-sm" placeholder="e.g. Morning sightseeing (optional)">
+        <span class="field-error" id="error-quick-add-activity"></span>
+      </div>
+      <div class="quick-add-actions">
+        <button type="button" class="btn btn-sm btn-outline" id="quick-add-cancel">Cancel</button>
+        <button type="submit" class="btn btn-sm btn-primary">Schedule Stop</button>
+      </div>
+    </form>
+  </div>

@@ -1,0 +1,104 @@
+    <!-- ==================== SCREEN 6: SUMMARY ==================== -->
+    <section class="app-screen" id="section-summary">
+      <div class="screen-container">
+
+        <div class="summary-header-block">
+          <div>
+            <p class="print-brand">Lakbay | Baguio City Travel Explorer &amp; Itinerary Planner</p>
+            <h1 class="page-title">Travel Plan Summary</h1>
+            <p class="page-subtitle">Complete review of your trip overview, day-by-day stops, and budget breakdown.</p>
+          </div>
+          <div class="summary-print-container" id="summary-header-actions">
+            <button type="button" class="btn btn-outline" id="btn-summary-copy-plan" title="Copy formatted travel plan to clipboard">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy Plan
+            </button>
+            <button type="button" class="btn btn-primary" id="btn-print-summary" style="display: none;">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+              Print / Save PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Summary Report Card -->
+        <div class="card summary-report-card" id="summary-report-card" style="display: none;">
+
+          <!-- Trip Overview Header -->
+          <div class="summary-trip-meta-header">
+            <div class="summary-meta-item">
+              <span class="summary-meta-label">Trip Destination</span>
+              <strong class="summary-meta-value">Baguio City, Philippines</strong>
+            </div>
+            <div class="summary-meta-item">
+              <span class="summary-meta-label">Duration</span>
+              <strong class="summary-meta-value" id="summary-meta-days">1 Day</strong>
+            </div>
+            <div class="summary-meta-item">
+              <span class="summary-meta-label">Travelers</span>
+              <strong class="summary-meta-value" id="summary-meta-travelers">1 Person</strong>
+            </div>
+            <div class="summary-meta-item">
+              <span class="summary-meta-label">Scheduled Stops</span>
+              <strong class="summary-meta-value" id="summary-meta-stops-count">0 Stops</strong>
+            </div>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <!-- Section: Itinerary Stops (Grouped by Day) -->
+          <div class="summary-block">
+            <h3 class="summary-block-title">Day-by-Day Itinerary Schedule</h3>
+            <div class="summary-itinerary-list" id="summary-itinerary-list"></div>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <!-- Section: Budget Breakdown -->
+          <div class="summary-block">
+            <h3 class="summary-block-title">Trip Budget Breakdown</h3>
+            <div class="summary-budget-table" id="summary-budget-breakdown-table">
+              <div class="summary-budget-row">
+                <span>Transportation:</span>
+                <strong id="summary-cost-trans">&#8369;0.00</strong>
+              </div>
+              <div class="summary-budget-row">
+                <span>Accommodation:</span>
+                <strong id="summary-cost-acc">&#8369;0.00</strong>
+              </div>
+              <div class="summary-budget-row">
+                <span>Food &amp; Dining:</span>
+                <strong id="summary-cost-food">&#8369;0.00</strong>
+              </div>
+              <div class="summary-budget-row">
+                <span>Activities &amp; Entrance Fees:</span>
+                <strong id="summary-cost-activities">&#8369;0.00</strong>
+              </div>
+              <div class="summary-budget-row">
+                <span>Other Activities &amp; Shopping:</span>
+                <strong id="summary-cost-extra">&#8369;0.00</strong>
+              </div>
+              <div class="summary-divider-sm"></div>
+              <div class="summary-budget-row total-line">
+                <span>Total Estimated Budget:</span>
+                <strong class="text-primary" id="summary-cost-total">&#8369;0.00</strong>
+              </div>
+              <div class="summary-budget-row per-person-line">
+                <span>Cost Per Traveler (<span id="summary-cost-travelers">1</span> person):</span>
+                <strong id="summary-cost-per-person">&#8369;0.00</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="summary-empty-state">
+          <div class="empty-icon-wrap">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </div>
+          <h3 class="empty-title">Nothing to summarize yet</h3>
+          <p class="empty-text">Add itinerary stops or budget entries to see your complete travel plan summary.</p>
+          <button type="button" class="btn btn-outline" data-section="explore">Start Exploring Places</button>
+        </div>
+
+      </div>
+    </section>

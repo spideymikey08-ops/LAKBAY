@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lakbay | Baguio City Travel Explorer &amp; Itinerary Planner</title>
+  <!-- Apply the saved appearance before stylesheets load to avoid a flash -->
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem('lakbay_appearance');
+        if (!theme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          theme = 'night';
+        }
+        if (theme === 'night') document.documentElement.setAttribute('data-theme', 'night');
+      } catch (e) { /* storage unavailable */ }
+    })();
+  </script>
+  <!-- Google Fonts: Barlow Condensed (display), DM Serif Display (editorial), Plus Jakarta Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Leaflet Maps CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <link rel="stylesheet" href="css/style.css?v=13">
+  <link rel="stylesheet" href="home/home.css">
+  <link rel="stylesheet" href="explore/explore.css">
+  <link rel="stylesheet" href="itinerary/itinerary.css?v=13">
+  <link rel="stylesheet" href="summary/summary.css">
+  <link rel="stylesheet" href="css/editorial.css">
+  <link rel="stylesheet" href="css/palette.css">
+  <link rel="stylesheet" href="css/night-mode.css">
+  <link rel="stylesheet" href="css/destination-card-revision.css">
+</head>
+<body>
+
+    <!-- ==================== LEFT SIDEBAR NAVIGATION (ANI-12 Style) ==================== -->
+  <aside class="sidebar navbar" id="main-nav">
+    <div class="brand">
+      <a href="#home" class="brand-link" data-section="home" aria-label="Lakbay Home">
+        <span class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L3 18h18L12 2z"></path>
+            <path d="M12 9L7 18h10L12 9z"></path>
+            <line x1="12" y1="18" x2="12" y2="22"></line>
+          </svg>
+        </span>
+        <strong>Lakbay</strong>
+      </a>
+
+      <!-- Appearance toggle (day / night) -->
+      <button type="button" class="appearance-toggle" id="appearance-toggle"
+              aria-label="Switch to night mode" aria-pressed="false" title="Toggle night mode">
+        <svg class="appearance-icon icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <line x1="12" y1="2" x2="12" y2="4"></line>
+          <line x1="12" y1="20" x2="12" y2="22"></line>
+          <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"></line>
+          <line x1="17.66" y1="17.66" x2="19.07" y2="19.07"></line>
+          <line x1="2" y1="12" x2="4" y2="12"></line>
+          <line x1="20" y1="12" x2="22" y2="12"></line>
+          <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"></line>
+          <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"></line>
+        </svg>
+        <svg class="appearance-icon icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- Mobile toggle -->
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Navigation Menu Items -->
+    <nav class="nav-links" id="nav-links">
+      <button type="button" class="nav-item active" data-section="home">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+        </span>
+        <span class="nav-label">Home</span>
+      </button>
+
+      <button type="button" class="nav-item" data-section="explore">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+          </svg>
+        </span>
+        <span class="nav-label">Explore</span>
+      </button>
+
+      <button type="button" class="nav-item" data-section="itinerary">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+            <line x1="16" x2="16" y1="2" y2="6"></line>
+            <line x1="8" x2="8" y1="2" y2="6"></line>
+            <line x1="3" x2="21" y1="10" y2="10"></line>
+          </svg>
+        </span>
+        <span class="nav-label">Itinerary</span>
+      </button>
+
+      <button type="button" class="nav-item" data-section="summary">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" x2="8" y1="13" y2="13"></line>
+            <line x1="16" x2="8" y1="17" y2="17"></line>
+            <line x1="10" x2="8" y1="9" y2="9"></line>
+          </svg>
+        </span>
+        <span class="nav-label">Summary</span>
+      </button>
+    </nav>
+
+    <!-- Sidebar Bottom Footer CTA -->
+    <div class="sidebar-footer">
+      <button type="button" class="btn btn-sidebar-cta" data-section="itinerary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        <span>Plan Trip</span>
+      </button>
+      <div class="sidebar-location-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span>Baguio City</span>
+      </div>
+    </div>
+  </aside>
+
+
+  <!-- Main App Viewport (Single Page Container) -->
+  <main class="app-main" id="app-viewport">
+
+        <!-- ==================== SCREEN 1: HOME - EDITORIAL LANDING ==================== -->
+    <section class="app-screen active" id="section-home">
+      <div class="screen-container">
+
+        <!-- 1. HERO — Discover Baguio -->
+        <div class="editorial-hero">
+          <div class="hero-copy">
+            <span class="hero-eyebrow">
+              <span class="eyebrow-dot"></span>
+              The Summer Capital of the Philippines
+            </span>
+            <h1 class="hero-display">
+              <span class="hero-line">Find your way</span>
+              <span class="hero-line">to <span class="hero-highlight">Baguio.</span></span>
+            </h1>
+            <p class="hero-copy-text">
+              A little escape to the City of Pines. Discover places, plan your days, and make every moment count.
+            </p>
+            <div class="hero-actions">
+              <button type="button" class="btn btn-primary btn-lg" data-section="itinerary">
+                Plan Your Trip
+              </button>
+              <button type="button" class="btn btn-outline btn-lg" data-section="explore">
+                Explore Baguio
+              </button>
+            </div>
+          </div>
+
+          <div class="hero-photo-col">
+            <div class="hero-photo-frame">
+              <img src="assets/images/mines-view-park.jpeg" alt="Pine trees and mountain view in Baguio City" fetchpriority="high">
+              <span class="hero-photo-caption">16° north · 1,540 m above sea level</span>
+            </div>
+            <div class="hero-floating-note">
+              <strong>21</strong>
+              <span>Curated places</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. INTRODUCTION — The Beauty of the Highlands -->
+        <div class="editorial-section intro-section">
+          <div class="intro-grid">
+            <div class="intro-copy">
+              <span class="section-kicker">The Beauty of the Highlands</span>
+              <h2 class="editorial-title">A City Above the Ordinary.</h2>
+              <p class="editorial-lead">
+                Baguio rests high in the Cordillera mountains, where cool pine-scented air meets a culture shaped by
+                Igorot heritage. Spend a morning beside Burnham Park's lagoon, follow the scent of brewed coffee down
+                Session Road, taste strawberry taho from a neighborhood vendor, then climb toward a ridge where the
+                clouds settle over the city. Every turn reveals another reason to linger a little longer.
+              </p>
+              <p class="editorial-lead" style="margin-top: 1rem;">
+                From heritage gardens and museum galleries to strawberry farms and night markets, this is a place best
+                explored slowly — and planned well.
+              </p>
+
+              <div class="stat-grid">
+                <div class="stat-card">
+                  <span class="stat-value">1,540m</span>
+                  <span class="stat-label">Elevation</span>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-value">12–23°</span>
+                  <span class="stat-label">Typical temperature</span>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-value">20</span>
+                  <span class="stat-label">Curated destinations</span>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-value">2–3</span>
+                  <span class="stat-label">Ideal days to explore</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trip planning progress (kept interactive) -->
+            <div class="progress-col">
+              <div class="card progress-card">
+                <div class="progress-panel-header">
+                  <div>
+                    <h3 class="progress-panel-title">Your journey at a glance</h3>
+                    <p class="progress-panel-subtitle">Two simple steps toward your Baguio plan</p>
+                  </div>
+                  <span class="progress-percentage" id="hero-progress-percent">0%</span>
+                </div>
+                <div class="progress-bar-track">
+                  <div class="progress-bar-fill" id="hero-progress-bar" style="width: 0%;"></div>
+                </div>
+
+                <div class="progress-steps-list">
+                  <div class="progress-step-item" id="step-budget">
+                    <div class="step-check-icon">
+                      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="step-details">
+                      <span class="step-name">1. Set your travel direction</span>
+                      <span class="step-status" id="step-budget-status">Not set yet</span>
+                    </div>
+                  </div>
+
+                  <div class="progress-step-item" id="step-stops">
+                    <div class="step-check-icon">
+                      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="step-details">
+                      <span class="step-name">2. Shape your daily stops</span>
+                      <span class="step-status" id="step-stops-status">0 stops planned</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="next-step-prompt" id="hero-next-step-box">
+                  <div class="next-step-info">
+                    <span class="next-step-tag">Next step</span>
+                    <p class="next-step-text" id="hero-next-step-text">Establish your estimated travel budget in the Itinerary Planner.</p>
+                  </div>
+                  <button type="button" class="btn btn-sm btn-primary next-step-btn" id="hero-next-step-btn" data-section="itinerary">
+                    Set Travel Budget &rarr;
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. FEATURED DESTINATIONS -->
+        <div class="editorial-section">
+          <div class="editorial-section-head">
+            <div>
+              <span class="section-kicker">Explore Destinations</span>
+              <h2 class="editorial-title">Places worth the detour.</h2>
+              <p class="editorial-lead">A small selection of the parks, ridges, gardens, and cultural corners waiting for you.</p>
+            </div>
+            <button type="button" class="link-btn" data-section="explore">See all 21 destinations &rarr;</button>
+          </div>
+
+          <div class="cards-grid home-featured-grid" id="home-featured-grid">
+            <!-- Dynamically populated by JS -->
+          </div>
+
+          <div class="featured-carousel-dots" id="featured-carousel-dots" role="tablist" aria-label="Featured destinations slider pagination">
+            <button type="button" class="carousel-dot active" data-page="0" aria-label="Page 1" role="tab" aria-selected="true"></button>
+            <button type="button" class="carousel-dot" data-page="1" aria-label="Page 2" role="tab" aria-selected="false"></button>
+            <button type="button" class="carousel-dot" data-page="2" aria-label="Page 3" role="tab" aria-selected="false"></button>
+            <button type="button" class="carousel-dot" data-page="3" aria-label="Page 4" role="tab" aria-selected="false"></button>
+            <button type="button" class="carousel-dot" data-page="4" aria-label="Page 5" role="tab" aria-selected="false"></button>
+          </div>
+        </div>
+
+        <!-- 4. EXPERIENCE BAGUIO -->
+        <div class="editorial-section">
+          <div class="editorial-section-head">
+            <div>
+              <span class="section-kicker">Experience Baguio</span>
+              <h2 class="editorial-title">The city is best tasted slowly.</h2>
+              <p class="editorial-lead">Follow the small rituals that make a highland visit feel like your own.</p>
+            </div>
+          </div>
+
+          <div class="experience-grid">
+            <article class="experience-card">
+              <img src="assets/images/session-road.jpeg" alt="Cafes and restaurants along Session Road" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">01 / FLAVORS</span>
+                <h3>Local food &amp; restaurants</h3>
+                <p>Warm soups, raisin bread, and Cordilleran dishes served in homegrown kitchens.</p>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <img src="assets/images/camp-john-hay.jpg" alt="Pine forest cafe setting in Camp John Hay" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">02 / SLOW MOMENTS</span>
+                <h3>Cafes &amp; coffee shops</h3>
+                <p>Benguet coffee, thick hot chocolate, and a window seat beneath the pines.</p>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <img src="assets/images/botanical-garden.jpeg" alt="Green gardens in Baguio" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">03 / THE FIELDS</span>
+                <h3>Strawberry picking</h3>
+                <p>Head to the outskirts for cool air, sweet berries, and a basket worth bringing home.</p>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <img src="assets/images/night-market.jpeg" alt="Night market stalls in Baguio" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">04 / AFTER DARK</span>
+                <h3>Shopping &amp; local markets</h3>
+                <p>From ukay finds on Harrison Road to handcrafted souvenirs and jars of ube jam.</p>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <img src="assets/images/tam-awan-village.jpeg" alt="Traditional Ifugao huts at Tam-Awan Village" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">05 / HERITAGE</span>
+                <h3>Cultural attractions</h3>
+                <p>Ancient stonework, living traditions, and galleries shaped by Cordilleran artists.</p>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <img src="assets/images/sky-ranch.jpeg" alt="Open mountain terrain near Baguio" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">06 / OUTDOORS</span>
+                <h3>Nature &amp; open air</h3>
+                <p>Pine trails, garden paths, and ridge views made for unhurried mornings.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- 5. TRAVEL GUIDE -->
+        <div class="editorial-section">
+          <div class="editorial-section-head">
+            <div>
+              <span class="section-kicker">Travel Guide</span>
+              <h2 class="editorial-title">The practical details, beautifully simple.</h2>
+              <p class="editorial-lead">Everything you need before you go, gathered in one quiet place.</p>
+            </div>
+          </div>
+
+          <div class="guide-grid">
+            <article class="guide-card">
+              <div class="guide-card-head">
+                <span class="guide-card-icon">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="8" rx="2"></rect><path d="M5 19v2M19 19v2M7 11V7a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v4"></path></svg>
+                </span>
+                <h3>Getting there</h3>
+              </div>
+              <p><strong>By bus:</strong> roughly 4–6 hours from Manila to Baguio. <strong>Around town:</strong> jeepneys, taxis, and ride-hailing services cover most destinations.</p>
+            </article>
+
+            <article class="guide-card">
+              <div class="guide-card-head">
+                <span class="guide-card-icon">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                </span>
+                <h3>Estimated expenses</h3>
+              </div>
+              <p>Budget around <strong>₱1,500–₱3,500</strong> for a modest two-day trip, excluding intercity transport. Entrance fees are usually ₱0–₱200.</p>
+            </article>
+
+            <article class="guide-card">
+              <div class="guide-card-head">
+                <span class="guide-card-icon">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11h18M5 11V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5M4 11v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path></svg>
+                </span>
+                <h3>Where to eat</h3>
+              </div>
+              <p>Start with strawberry taho and raisin bread, then try Cordilleran specialties, hot chocolate, and a slow dinner along Session Road.</p>
+            </article>
+
+            <article class="guide-card">
+              <div class="guide-card-head">
+                <span class="guide-card-icon">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+                </span>
+                <h3>Travel tips</h3>
+              </div>
+              <p>Visit popular spots before 10 AM, keep small bills handy, and check opening days for museums before finalizing your route.</p>
+            </article>
+
+            <article class="guide-card">
+              <div class="guide-card-head">
+                <span class="guide-card-icon">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"></path></svg>
+                </span>
+                <h3>Packing essentials</h3>
+              </div>
+              <p>Bring a light jacket, comfortable walking shoes, an umbrella, a reusable bottle, and a small pouch for cash and IDs.</p>
+            </article>
+
+            <article class="guide-card">
+              <div class="guide-card-head">
+                <span class="guide-card-icon">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg>
+                </span>
+                <h3>Good to remember</h3>
+              </div>
+              <p>Respect heritage sites, follow local jeepney routes, and leave extra time for the winding roads into the mountains.</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- 6. FINAL CTA -->
+        <div class="final-cta">
+          <img src="assets/images/camp-john-hay.jpg" alt="Pine trees in the Baguio highlands" loading="lazy">
+          <div class="final-cta-content">
+            <span class="section-kicker">Your Baguio Story Starts Here</span>
+            <h2 class="final-cta-title">Your Next Chapter Begins in Baguio.</h2>
+            <p class="final-cta-text">
+              Build your itinerary, discover hidden gems, and make your highland getaway unforgettable.
+            </p>
+            <button type="button" class="btn btn-primary btn-lg" data-section="itinerary">
+              Create My Itinerary
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+        <!-- ==================== SCREEN 2: EXPLORE ==================== -->
+    <section class="app-screen" id="section-explore">
+      <div class="screen-container">
+        <div class="explore-header">
+          <div>
+            <span class="section-kicker">Explore Destinations</span>
+            <h1 class="page-title editorial-title">Explore Baguio Destinations</h1>
+            <p class="page-subtitle">Search, filter by category or price, and discover the parks, ridges, gardens, and cultural corners that make the City of Pines worth wandering.</p>
+          </div>
+        </div>
+
+        <!-- Search & Filters -->
+        <div class="explore-toolbar">
+          <div class="explore-search-row">
+            <div class="search-bar-wrap">
+              <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input 
+                type="text" 
+                id="search-input" 
+                class="search-input" 
+                placeholder="Search by destination name, activity, or location..."
+                autocomplete="off"
+              >
+              <button type="button" class="search-clear-btn" id="search-clear-btn" aria-label="Clear search" style="display: none;">&times;</button>
+            </div>
+
+            <div class="explore-secondary-actions">
+              <button type="button" class="btn btn-sm btn-outline" id="btn-toggle-explore-map" title="Toggle interactive Baguio City map">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+                <span id="btn-toggle-explore-map-text">Show Map</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="explore-controls-row">
+            <div class="filter-chips-row">
+              <div class="category-chips" id="category-chips-container">
+                <button type="button" class="chip active" data-category="All">All</button>
+                <button type="button" class="chip" data-category="Nature &amp; Parks">Nature &amp; Parks</button>
+                <button type="button" class="chip" data-category="Culture &amp; Heritage">Culture &amp; Heritage</button>
+                <button type="button" class="chip" data-category="Food &amp; Shopping">Food &amp; Shopping</button>
+                <button type="button" class="chip" data-category="Viewpoints">Viewpoints</button>
+                <button type="button" class="chip" data-category="Museums &amp; Arts">Museums &amp; Arts</button>
+              </div>
+            </div>
+
+            <div class="compact-filters">
+              <label class="sr-only" for="price-filter-select">Entry fee</label>
+              <select id="price-filter-select" class="compact-select">
+                <option value="all">Entry fee</option>
+                <option value="free">Free</option>
+                <option value="50">Under &#8369;50</option>
+                <option value="100">Under &#8369;100</option>
+              </select>
+
+              <label class="sr-only" for="filter-rating">Rating</label>
+              <select id="filter-rating" class="compact-select">
+                <option value="all">Rating</option>
+                <option value="4.7">4.7+</option>
+                <option value="4.8">4.8+</option>
+              </select>
+
+              <label class="sr-only" for="sort-dropdown">Sort</label>
+              <select id="sort-dropdown" class="compact-select">
+                <option value="name-asc">Sort: Name A-Z</option>
+                <option value="name-desc">Sort: Name Z-A</option>
+                <option value="rating-desc">Sort: Highest rated</option>
+                <option value="fee-asc">Sort: Lowest fee</option>
+                <option value="fee-desc">Sort: Highest fee</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Map Container (Collapsible / Toggleable) -->
+        <div class="explore-map-container" id="explore-map-container" style="display: none;">
+          <div class="map-header">
+            <div>
+              <h3 class="map-title">&#128506;&#65039; Baguio City Interactive Explorer Map</h3>
+              <p class="map-subtitle">Click pins to inspect destinations, check area clusters, or schedule stops.</p>
+            </div>
+            <span class="map-badge">21 Pinned Spots</span>
+          </div>
+          <div id="baguio-map" class="baguio-leaflet-map" role="region" aria-label="Interactive map of Baguio City tourist destinations"></div>
+        </div>
+
+        <!-- Results Counter -->
+        <div class="results-meta">
+          <span id="results-count-text">Showing 21 destinations</span>
+          <span class="results-meta-rule" aria-hidden="true"></span>
+        </div>
+
+        <!-- Destination Cards Gallery -->
+        <div class="cards-grid" id="explore-cards-grid">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <!-- Empty State for Search / Filter -->
+        <div class="empty-state" id="explore-empty-state" style="display: none;">
+          <div class="empty-icon-wrap">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </div>
+          <h3 class="empty-title">No destinations match your criteria</h3>
+          <p class="empty-text">Try adjusting your keywords, selecting "All" categories, or resetting price filters.</p>
+          <button type="button" class="btn btn-outline" id="btn-reset-explore-filters">Reset Filters</button>
+        </div>
+      </div>
+    </section>
+
+
+        <!-- ==================== SCREEN 4: ITINERARY ==================== -->
+    <section class="app-screen" id="section-itinerary">
+      <div class="screen-container itinerary-screen-container">
+
+        <!-- Header -->
+        <div class="itinerary-page-header">
+          <span class="section-kicker">Plan Your Itinerary</span>
+          <h1 class="page-title editorial-title">Build the Baguio days you'll remember.</h1>
+          <p class="page-subtitle">
+            Choose your dates, set a comfortable budget, then arrange destinations into an elegant day-by-day plan. All figures are estimates in Philippine Peso (&#8369;).
+          </p>
+        </div>
+
+        <!-- 0. TRIP SETUP -->
+        <div class="card trip-setup-card" id="trip-setup-card">
+          <div class="trip-setup-head">
+            <div>
+              <h2>Shape your Baguio escape</h2>
+              <p>Set the basics first — your dates, travel party, and how long you want to stay.</p>
+            </div>
+            <span class="trip-setup-badge">Trip setup</span>
+          </div>
+          <div class="trip-setup-grid">
+            <div class="trip-setup-field">
+              <label for="trip-start-date">Travel date</label>
+              <input type="date" id="trip-start-date" aria-label="Trip start date">
+            </div>
+            <div class="trip-setup-field">
+              <label for="trip-travelers">Travelers</label>
+              <select id="trip-travelers" aria-label="Number of travelers">
+                <option value="1">1 traveler</option>
+                <option value="2">2 travelers</option>
+                <option value="3">3 travelers</option>
+                <option value="4">4 travelers</option>
+                <option value="5">5 travelers</option>
+                <option value="6">6+ travelers</option>
+              </select>
+            </div>
+            <div class="trip-setup-field">
+              <label for="budget-trip-days">Trip duration</label>
+              <input type="number" id="budget-trip-days" class="form-input" value="2" min="1" max="30" aria-label="Trip duration in days">
+            </div>
+          </div>
+        </div>
+
+        <!-- 1. ACTIVE SELECTION VIEW -->
+        <div class="card budget-selector-card" id="budget-selector-view">
+          <div class="budget-card-header">
+            <div>
+              <h2 class="budget-card-title">Select Estimated Budget Range</h2>
+              <p class="budget-card-desc">Adjust the dual slider or type values directly to set your preferred spending range.</p>
+            </div>
+            <span class="budget-currency-pill">&#8369; PHP</span>
+          </div>
+
+          <!-- Quick Budget Presets -->
+          <div class="budget-presets-section">
+            <span class="presets-title">Quick Presets:</span>
+            <div class="budget-presets-row" id="budget-preset-buttons">
+              <button type="button" class="btn-preset active" data-min="1500" data-max="3500">
+                <span class="preset-name">Backpacker</span>
+                <span class="preset-range">&#8369;1,500 – &#8369;3,500</span>
+              </button>
+              <button type="button" class="btn-preset" data-min="3500" data-max="8000">
+                <span class="preset-name">Standard</span>
+                <span class="preset-range">&#8369;3,500 – &#8369;8,000</span>
+              </button>
+              <button type="button" class="btn-preset" data-min="8000" data-max="18000">
+                <span class="preset-name">Comfort</span>
+                <span class="preset-range">&#8369;8,000 – &#8369;18,000</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Dual-Range Slider Component -->
+          <div class="dual-range-wrapper">
+            <div class="dual-slider-track-bg">
+              <div class="dual-slider-highlight-bar" id="budget-highlight-track"></div>
+            </div>
+            <input 
+              type="range" 
+              id="budget-slider-min" 
+              class="budget-range-input range-input-min" 
+              min="500" 
+              max="25000" 
+              step="100" 
+              value="1500" 
+              aria-label="Minimum budget slider"
+            >
+            <input 
+              type="range" 
+              id="budget-slider-max" 
+              class="budget-range-input range-input-max" 
+              min="500" 
+              max="25000" 
+              step="100" 
+              value="3500" 
+              aria-label="Maximum budget slider"
+            >
+          </div>
+
+          <!-- Min / Max Numerical Input Fields -->
+          <div class="budget-display-grid">
+            <div class="budget-input-box">
+              <span class="budget-box-label">MINIMUM BUDGET</span>
+              <div class="budget-affix-wrap">
+                <span class="currency-tag">&#8369;</span>
+                <input 
+                  type="number" 
+                  id="budget-num-min" 
+                  class="form-input budget-box-input" 
+                  min="500" 
+                  max="25000" 
+                  step="100" 
+                  value="1500"
+                  aria-label="Minimum budget in pesos"
+                >
+              </div>
+            </div>
+
+            <div class="budget-separator-badge">to</div>
+
+            <div class="budget-input-box">
+              <span class="budget-box-label">MAXIMUM BUDGET</span>
+              <div class="budget-affix-wrap">
+                <span class="currency-tag">&#8369;</span>
+                <input 
+                  type="number" 
+                  id="budget-num-max" 
+                  class="form-input budget-box-input" 
+                  min="500" 
+                  max="25000" 
+                  step="100" 
+                  value="3500"
+                  aria-label="Maximum budget in pesos"
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Real-Time Calculation & Projected Allocation -->
+          <div class="budget-calculation-card">
+            <div class="calc-row">
+              <span class="calc-label">Estimated Daily Allowance:</span>
+              <strong class="calc-val" id="budget-calc-daily">&#8369;750 – &#8369;1,750 / day</strong>
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">Suggested Cost Allocation (Max &#8369;<span id="budget-calc-max">3,500</span>):</span>
+            </div>
+            <div class="allocation-bars-grid">
+              <div class="alloc-item">
+                <span class="alloc-cat">Lodging (40%)</span>
+                <span class="alloc-val" id="alloc-lodging">&#8369;1,400</span>
+              </div>
+              <div class="alloc-item">
+                <span class="alloc-cat">Food (25%)</span>
+                <span class="alloc-val" id="alloc-food">&#8369;875</span>
+              </div>
+              <div class="alloc-item">
+                <span class="alloc-cat">Transpo (15%)</span>
+                <span class="alloc-val" id="alloc-transpo">&#8369;525</span>
+              </div>
+              <div class="alloc-item">
+                <span class="alloc-cat">Activities (10%)</span>
+                <span class="alloc-val" id="alloc-activities">&#8369;350</span>
+              </div>
+              <div class="alloc-item">
+                <span class="alloc-cat">Other (10%)</span>
+                <span class="alloc-val" id="alloc-other">&#8369;350</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Confirm Action Button -->
+          <div class="budget-action-footer">
+            <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-confirm-budget">
+              Confirm Budget &amp; Continue &rarr;
+            </button>
+          </div>
+        </div>
+
+                <!-- 2. CONFIRMED BUDGET & ITINERARY PLANNING WORKSPACE -->
+        <div class="card budget-confirmed-card" id="budget-confirmed-view" style="display: none;">
+          
+          <!-- Top Row: Status, Trip Duration & Actions -->
+          <div class="confirmed-badge-row">
+            <div class="confirmed-status-group">
+              <span class="confirmed-badge">&#10003; Budget Established</span>
+              <span class="confirmed-trip-title" id="confirmed-trip-title">Baguio City Trip</span>
+            </div>
+            <div class="confirmed-actions-group">
+              <button type="button" class="btn btn-outline btn-sm" id="btn-edit-confirmed-budget" title="Change your minimum and maximum budget">
+                &#9998; Edit Budget
+              </button>
+              <button type="button" class="btn btn-outline btn-sm" id="btn-load-sample-itinerary" title="Load sample 2-day plan">
+                &#10024; Load Sample Plan
+              </button>
+              <button type="button" class="btn btn-outline btn-sm text-danger" id="btn-clear-itinerary" title="Clear all stops">
+                &#128465; Clear All
+              </button>
+            </div>
+          </div>
+
+          <!-- Compact trip overview strip -->
+          <div class="itinerary-trip-summary">
+            <div class="trip-summary-item">
+              <span class="trip-summary-icon" aria-hidden="true">&#128197;</span>
+              <div class="trip-summary-copy">
+                <span class="trip-summary-label">Travel Dates</span>
+                <strong id="summary-date-range">&mdash;</strong>
+              </div>
+            </div>
+            <div class="trip-summary-item">
+              <span class="trip-summary-icon" aria-hidden="true">&#128101;</span>
+              <div class="trip-summary-copy">
+                <span class="trip-summary-label">Travelers</span>
+                <strong id="summary-travelers">1 Traveler</strong>
+              </div>
+            </div>
+            <div class="trip-summary-item">
+              <span class="trip-summary-icon" aria-hidden="true">&#9203;</span>
+              <div class="trip-summary-copy">
+                <span class="trip-summary-label">Duration</span>
+                <strong id="summary-days">2 Days</strong>
+              </div>
+            </div>
+            <div class="trip-summary-item trip-summary-total">
+              <span class="trip-summary-icon" aria-hidden="true">&#8369;</span>
+              <div class="trip-summary-copy">
+                <span class="trip-summary-label">Total Budget</span>
+                <strong id="summary-total-budget">&#8369;3,500</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- LEFT: day-by-day route planner -->
+          <div class="itinerary-main-column">
+            <!-- Planner Workspace Header & Day Filter Tabs -->
+            <div class="itinerary-workspace-header">
+              <div class="day-filter-tabs" id="itinerary-day-tabs">
+                <button type="button" class="day-tab-pill active" data-day="all">All Days</button>
+                <button type="button" class="day-tab-pill" data-day="1">Day 1</button>
+                <button type="button" class="day-tab-pill" data-day="2">Day 2</button>
+              </div>
+              <button type="button" class="btn btn-primary plan-add-fab" id="btn-open-add-stop-modal" aria-label="Add a place to your itinerary">
+                +
+              </button>
+            </div>
+
+            <!-- Day-by-Day Stops Container -->
+            <div class="itinerary-days-container" id="itinerary-days-list">
+              <!-- Dynamically populated by renderTimelineDays() -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+        <!-- ==================== SCREEN 6: SUMMARY ==================== -->
+    <section class="app-screen" id="section-summary">
+      <div class="screen-container">
+
+        <div class="summary-header-block">
+          <div>
+            <p class="print-brand">Lakbay | Baguio City Travel Explorer &amp; Itinerary Planner</p>
+            <h1 class="page-title">Travel Plan Summary</h1>
+            <p class="page-subtitle">Complete review of your trip overview, day-by-day stops, and budget breakdown.</p>
+          </div>
+          <div class="summary-print-container" id="summary-header-actions">
+            <button type="button" class="btn btn-outline" id="btn-summary-copy-plan" title="Copy formatted travel plan to clipboard">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy Plan
+            </button>
+            <button type="button" class="btn btn-primary" id="btn-print-summary" style="display: none;">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+              Print / Save PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Summary Report Card -->
+        <div class="card summary-report-card" id="summary-report-card" style="display: none;">
+
+          <!-- Trip Overview Header -->
+          <div class="summary-trip-meta-header">
+            <div class="summary-meta-item">
+              <span class="summary-meta-label">Trip Destination</span>
+              <strong class="summary-meta-value">Baguio City, Philippines</strong>
+            </div>
+            <div class="summary-meta-item">
+              <span class="summary-meta-label">Duration</span>
+              <strong class="summary-meta-value" id="summary-meta-days">1 Day</strong>
+            </div>
+            <div class="summary-meta-item">
+              <span class="summary-meta-label">Travelers</span>
+              <strong class="summary-meta-value" id="summary-meta-travelers">1 Person</strong>
+            </div>
+            <div class="summary-meta-item">
+              <span class="summary-meta-label">Scheduled Stops</span>
+              <strong class="summary-meta-value" id="summary-meta-stops-count">0 Stops</strong>
+            </div>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <!-- Section: Itinerary Stops (Grouped by Day) -->
+          <div class="summary-block">
+            <h3 class="summary-block-title">Day-by-Day Itinerary Schedule</h3>
+            <div class="summary-itinerary-list" id="summary-itinerary-list"></div>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <!-- Section: Budget Breakdown -->
+          <div class="summary-block">
+            <h3 class="summary-block-title">Trip Budget Breakdown</h3>
+            <div class="summary-budget-table" id="summary-budget-breakdown-table">
+              <div class="summary-budget-row">
+                <span>Transportation:</span>
+                <strong id="summary-cost-trans">&#8369;0.00</strong>
+              </div>
+              <div class="summary-budget-row">
+                <span>Accommodation:</span>
+                <strong id="summary-cost-acc">&#8369;0.00</strong>
+              </div>
+              <div class="summary-budget-row">
+                <span>Food &amp; Dining:</span>
+                <strong id="summary-cost-food">&#8369;0.00</strong>
+              </div>
+              <div class="summary-budget-row">
+                <span>Activities &amp; Entrance Fees:</span>
+                <strong id="summary-cost-activities">&#8369;0.00</strong>
+              </div>
+              <div class="summary-budget-row">
+                <span>Other Activities &amp; Shopping:</span>
+                <strong id="summary-cost-extra">&#8369;0.00</strong>
+              </div>
+              <div class="summary-divider-sm"></div>
+              <div class="summary-budget-row total-line">
+                <span>Total Estimated Budget:</span>
+                <strong class="text-primary" id="summary-cost-total">&#8369;0.00</strong>
+              </div>
+              <div class="summary-budget-row per-person-line">
+                <span>Cost Per Traveler (<span id="summary-cost-travelers">1</span> person):</span>
+                <strong id="summary-cost-per-person">&#8369;0.00</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="summary-empty-state">
+          <div class="empty-icon-wrap">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </div>
+          <h3 class="empty-title">Nothing to summarize yet</h3>
+          <p class="empty-text">Add itinerary stops or budget entries to see your complete travel plan summary.</p>
+          <button type="button" class="btn btn-outline" data-section="explore">Start Exploring Places</button>
+        </div>
+
+      </div>
+    </section>
+
+
+  </main>
+
+    <!-- ==================== SCREEN 3: DESTINATION DETAILS MODAL ==================== -->
+  <div class="modal-overlay" id="destination-modal" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-dialog" id="destination-modal-dialog">
+      <div class="modal-content">
+        <!-- Close Button -->
+        <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">&times;</button>
+        
+        <!-- Modal Top Image Banner -->
+        <div class="modal-image-wrap">
+          <img id="modal-img" src="assets/images/burnham-park.jpg" alt="Destination photo" class="modal-image">
+          <div class="modal-badge-row">
+            <span class="badge" id="modal-category">Category</span>
+            <span class="badge fee-badge" id="modal-fee">Fee: &#8369;0</span>
+            <span class="badge rating-badge" id="modal-rating-badge">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="#f59e0b" stroke="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <span id="modal-rating-text">4.8</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Modal Body Content (Scrollable) -->
+        <div class="modal-body" id="modal-scrollable-body">
+          <h2 class="modal-title" id="modal-title">Destination Name</h2>
+          <p class="modal-location" id="modal-location">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span id="modal-location-text">Location</span>
+          </p>
+
+          <div class="modal-info-grid">
+            <div class="modal-info-card">
+              <span class="modal-info-label">&#128205; Area Cluster</span>
+              <strong class="modal-info-val" id="modal-area">Downtown / Burnham</strong>
+            </div>
+            <div class="modal-info-card">
+              <span class="modal-info-label">&#128338; Operating Hours</span>
+              <strong class="modal-info-val" id="modal-hours">Open 24 hours daily</strong>
+            </div>
+          </div>
+
+          <div class="modal-section">
+            <h4 class="modal-section-heading">About</h4>
+            <p class="modal-description" id="modal-description">Description text...</p>
+          </div>
+
+          <div class="modal-section">
+            <h4 class="modal-section-heading">Activities</h4>
+            <div class="modal-activities-tags" id="modal-activities">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <div class="modal-section">
+            <h4 class="modal-section-heading">&#127749; Best Time to Visit</h4>
+            <p class="modal-detail-text" id="modal-best-time">Morning hours</p>
+          </div>
+
+          <div class="modal-section">
+            <h4 class="modal-section-heading">&#128652; How to Get There</h4>
+            <p class="modal-detail-text" id="modal-how-to-get-there">Directions</p>
+          </div>
+
+          <div class="modal-section modal-tip-box">
+            <h4 class="modal-section-heading">&#128161; Local Baguio Tip</h4>
+            <p class="modal-detail-text" id="modal-tip">Tip</p>
+          </div>
+
+          <div class="modal-section modal-map-link-section">
+            <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm btn-gmaps" id="modal-gmaps-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              <span>Open in Google Maps &rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Modal Actions (Pinned to Bottom) -->
+        <div class="modal-footer" id="modal-pinned-footer">
+          <button type="button" class="btn btn-primary" id="modal-itinerary-btn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span id="modal-itinerary-btn-text">Add to itinerary</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- ==================== CLEAR ALL CONFIRMATION DIALOG ==================== -->
+  <div class="modal-overlay" id="confirm-modal" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
+    <div class="modal-backdrop" id="confirm-modal-backdrop"></div>
+    <div class="modal-dialog modal-dialog-sm">
+      <div class="modal-content confirm-dialog-content">
+        <h3 class="confirm-title" id="confirm-modal-title">Clear all stops?</h3>
+        <p class="confirm-message" id="confirm-modal-msg">Are you sure you want to remove all planned itinerary stops? This action cannot be undone.</p>
+        <div class="confirm-actions">
+          <button type="button" class="btn btn-outline" id="confirm-cancel-btn">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirm-ok-btn">Clear all</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- ==================== QUICK-ADD ITINERARY POPOVER ==================== -->
+  <div class="quick-add-popover" id="quick-add-popover" hidden>
+    <div class="quick-add-header">
+      <h4 class="quick-add-title" id="quick-add-title">Add to itinerary</h4>
+      <button type="button" class="quick-add-close" id="quick-add-close" aria-label="Close popover">&times;</button>
+    </div>
+    <form id="quick-add-form" novalidate>
+      <input type="hidden" id="quick-add-dest-id">
+      <div class="form-group-sm">
+        <label for="quick-add-date" class="form-label-sm">Date</label>
+        <input type="date" id="quick-add-date" class="form-input form-input-sm" required>
+        <span class="field-error" id="error-quick-add-date"></span>
+      </div>
+      <div class="form-row-2col">
+        <div class="form-group-sm">
+          <label for="quick-add-time" class="form-label-sm">Time</label>
+          <input type="time" id="quick-add-time" class="form-input form-input-sm" value="09:00" required>
+          <span class="field-error" id="error-quick-add-time"></span>
+        </div>
+        <div class="form-group-sm">
+          <label for="quick-add-duration" class="form-label-sm">Duration</label>
+          <select id="quick-add-duration" class="form-select form-input-sm">
+            <option value="45">45 mins</option>
+            <option value="60">1 hour</option>
+            <option value="90" selected>1.5 hrs</option>
+            <option value="120">2 hours</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group-sm">
+        <label for="quick-add-activity" class="form-label-sm">
+          Activity <span class="form-optional">(Optional)</span>
+        </label>
+        <input type="text" id="quick-add-activity" class="form-input form-input-sm" placeholder="e.g. Morning sightseeing (optional)">
+        <span class="field-error" id="error-quick-add-activity"></span>
+      </div>
+      <div class="quick-add-actions">
+        <button type="button" class="btn btn-sm btn-outline" id="quick-add-cancel">Cancel</button>
+        <button type="submit" class="btn btn-sm btn-primary">Schedule Stop</button>
+      </div>
+    </form>
+  </div>
+
+
+      <!-- ==================== ADD / EDIT ITINERARY STOP MODAL (RIGHT SIDE DRAWER) ==================== -->
+  <div class="modal-overlay modal-side" id="stop-editor-modal" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
+    <div class="modal-backdrop" id="stop-editor-backdrop"></div>
+    <div class="modal-dialog modal-dialog-drawer">
+      <div class="modal-content">
+
+        <!-- Pinned drawer header -->
+        <div class="modal-header drawer-header">
+          <div class="drawer-heading">
+            <span class="drawer-kicker">Trip Planner</span>
+            <h3 class="modal-title" id="stop-modal-title">Add Place to Itinerary</h3>
+          </div>
+          <button type="button" class="modal-close-btn drawer-close-btn" id="stop-modal-close" aria-label="Close dialog">&times;</button>
+        </div>
+
+        <form id="stop-editor-form" class="drawer-form" novalidate onsubmit="return false;">
+          <input type="hidden" id="stop-edit-id" value="">
+          <!-- Hidden picker keeps the existing destination lookup intact -->
+          <select id="stop-destination-select" class="form-select" style="display: none;" tabindex="-1" aria-hidden="true"></select>
+
+          <!-- Scrollable, evenly-spaced form body -->
+          <div class="drawer-form-body">
+
+            <div class="form-group">
+              <label for="stop-activity-input" class="form-label">Planned Activity <span class="form-optional">(Optional)</span></label>
+              <select id="stop-activity-input" class="form-select">
+                <option value="">Select an activity</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="stop-place-input" class="form-label">Where do you want to go?</label>
+              <input type="text" id="stop-place-input" class="form-input form-input-lg" list="stop-place-options"
+                     placeholder="Type a place or activity (e.g. SM Baguio)" autocomplete="off" required>
+              <datalist id="stop-place-options"></datalist>
+            </div>
+
+            <div class="form-group">
+              <label for="stop-day-select" class="form-label">Trip Day</label>
+              <select id="stop-day-select" class="form-select">
+                <!-- Populated dynamically: Day 1, Day 2... -->
+              </select>
+            </div>
+
+          </div>
+
+          <!-- Pinned drawer footer -->
+          <div class="modal-actions-footer drawer-form-footer">
+            <button type="button" class="btn btn-outline-danger drawer-remove-btn" id="btn-remove-stop" style="display: none;">Remove</button>
+            <button type="button" class="btn btn-outline" id="btn-cancel-stop-modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="btn-save-stop">Add to Itinerary</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Toast Notification Center (Bottom-left, aria-live) -->
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+
+  <!-- Scripts (classic scripts: order matters, app.js must stay last) -->
+  <script src="js/data/destinations.js"></script>
+  <script src="js/core/state.js"></script>
+  <script src="js/core/helpers.js"></script>
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/navigation.js"></script>
+  <script src="js/core/appearance.js"></script>
+  <script src="js/components/toast.js"></script>
+  <script src="js/components/confirm-dialog.js"></script>
+  <script src="home/home.js"></script>
+  <script src="explore/explore.js?v=2"></script>
+  <script src="itinerary/itinerary.js?v=13"></script>
+  <script src="summary/summary.js?v=2"></script>
+  <script src="js/features/export-import.js"></script>
+  <script src="js/legacy-stubs.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

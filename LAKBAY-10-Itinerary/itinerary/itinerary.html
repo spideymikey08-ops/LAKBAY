@@ -1,0 +1,259 @@
+    <!-- ==================== SCREEN 4: ITINERARY ==================== -->
+    <section class="app-screen" id="section-itinerary">
+      <div class="screen-container itinerary-screen-container">
+
+        <!-- Header -->
+        <div class="itinerary-page-header">
+          <span class="section-kicker">Plan Your Itinerary</span>
+          <h1 class="page-title editorial-title">Build the Baguio days you'll remember.</h1>
+          <p class="page-subtitle">
+            Choose your dates, set a comfortable budget, then arrange destinations into an elegant day-by-day plan. All figures are estimates in Philippine Peso (&#8369;).
+          </p>
+        </div>
+
+        <!-- 0. TRIP SETUP -->
+        <div class="card trip-setup-card" id="trip-setup-card">
+          <div class="trip-setup-head">
+            <div>
+              <h2>Shape your Baguio escape</h2>
+              <p>Set the basics first — your dates, travel party, and how long you want to stay.</p>
+            </div>
+            <span class="trip-setup-badge">Trip setup</span>
+          </div>
+          <div class="trip-setup-grid">
+            <div class="trip-setup-field">
+              <label for="trip-start-date">Travel date</label>
+              <input type="date" id="trip-start-date" aria-label="Trip start date">
+            </div>
+            <div class="trip-setup-field">
+              <label for="trip-travelers">Travelers</label>
+              <select id="trip-travelers" aria-label="Number of travelers">
+                <option value="1">1 traveler</option>
+                <option value="2">2 travelers</option>
+                <option value="3">3 travelers</option>
+                <option value="4">4 travelers</option>
+                <option value="5">5 travelers</option>
+                <option value="6">6+ travelers</option>
+              </select>
+            </div>
+            <div class="trip-setup-field">
+              <label for="budget-trip-days">Trip duration</label>
+              <input type="number" id="budget-trip-days" class="form-input" value="2" min="1" max="30" aria-label="Trip duration in days">
+            </div>
+          </div>
+        </div>
+
+        <!-- 1. ACTIVE SELECTION VIEW -->
+        <div class="card budget-selector-card" id="budget-selector-view">
+          <div class="budget-card-header">
+            <div>
+              <h2 class="budget-card-title">Select Estimated Budget Range</h2>
+              <p class="budget-card-desc">Adjust the dual slider or type values directly to set your preferred spending range.</p>
+            </div>
+            <span class="budget-currency-pill">&#8369; PHP</span>
+          </div>
+
+          <!-- Quick Budget Presets -->
+          <div class="budget-presets-section">
+            <span class="presets-title">Quick Presets:</span>
+            <div class="budget-presets-row" id="budget-preset-buttons">
+              <button type="button" class="btn-preset active" data-min="1500" data-max="3500">
+                <span class="preset-name">Backpacker</span>
+                <span class="preset-range">&#8369;1,500 – &#8369;3,500</span>
+              </button>
+              <button type="button" class="btn-preset" data-min="3500" data-max="8000">
+                <span class="preset-name">Standard</span>
+                <span class="preset-range">&#8369;3,500 – &#8369;8,000</span>
+              </button>
+              <button type="button" class="btn-preset" data-min="8000" data-max="18000">
+                <span class="preset-name">Comfort</span>
+                <span class="preset-range">&#8369;8,000 – &#8369;18,000</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Dual-Range Slider Component -->
+          <div class="dual-range-wrapper">
+            <div class="dual-slider-track-bg">
+              <div class="dual-slider-highlight-bar" id="budget-highlight-track"></div>
+            </div>
+            <input 
+              type="range" 
+              id="budget-slider-min" 
+              class="budget-range-input range-input-min" 
+              min="500" 
+              max="25000" 
+              step="100" 
+              value="1500" 
+              aria-label="Minimum budget slider"
+            >
+            <input 
+              type="range" 
+              id="budget-slider-max" 
+              class="budget-range-input range-input-max" 
+              min="500" 
+              max="25000" 
+              step="100" 
+              value="3500" 
+              aria-label="Maximum budget slider"
+            >
+          </div>
+
+          <!-- Min / Max Numerical Input Fields -->
+          <div class="budget-display-grid">
+            <div class="budget-input-box">
+              <span class="budget-box-label">MINIMUM BUDGET</span>
+              <div class="budget-affix-wrap">
+                <span class="currency-tag">&#8369;</span>
+                <input 
+                  type="number" 
+                  id="budget-num-min" 
+                  class="form-input budget-box-input" 
+                  min="500" 
+                  max="25000" 
+                  step="100" 
+                  value="1500"
+                  aria-label="Minimum budget in pesos"
+                >
+              </div>
+            </div>
+
+            <div class="budget-separator-badge">to</div>
+
+            <div class="budget-input-box">
+              <span class="budget-box-label">MAXIMUM BUDGET</span>
+              <div class="budget-affix-wrap">
+                <span class="currency-tag">&#8369;</span>
+                <input 
+                  type="number" 
+                  id="budget-num-max" 
+                  class="form-input budget-box-input" 
+                  min="500" 
+                  max="25000" 
+                  step="100" 
+                  value="3500"
+                  aria-label="Maximum budget in pesos"
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Real-Time Calculation & Projected Allocation -->
+          <div class="budget-calculation-card">
+            <div class="calc-row">
+              <span class="calc-label">Estimated Daily Allowance:</span>
+              <strong class="calc-val" id="budget-calc-daily">&#8369;750 – &#8369;1,750 / day</strong>
+            </div>
+            <div class="calc-row">
+              <span class="calc-label">Suggested Cost Allocation (Max &#8369;<span id="budget-calc-max">3,500</span>):</span>
+            </div>
+            <div class="allocation-bars-grid">
+              <div class="alloc-item">
+                <span class="alloc-cat">Lodging (40%)</span>
+                <span class="alloc-val" id="alloc-lodging">&#8369;1,400</span>
+              </div>
+              <div class="alloc-item">
+                <span class="alloc-cat">Food (25%)</span>
+                <span class="alloc-val" id="alloc-food">&#8369;875</span>
+              </div>
+              <div class="alloc-item">
+                <span class="alloc-cat">Transpo (15%)</span>
+                <span class="alloc-val" id="alloc-transpo">&#8369;525</span>
+              </div>
+              <div class="alloc-item">
+                <span class="alloc-cat">Activities (10%)</span>
+                <span class="alloc-val" id="alloc-activities">&#8369;350</span>
+              </div>
+              <div class="alloc-item">
+                <span class="alloc-cat">Other (10%)</span>
+                <span class="alloc-val" id="alloc-other">&#8369;350</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Confirm Action Button -->
+          <div class="budget-action-footer">
+            <button type="button" class="btn btn-primary btn-lg btn-block" id="btn-confirm-budget">
+              Confirm Budget &amp; Continue &rarr;
+            </button>
+          </div>
+        </div>
+
+                <!-- 2. CONFIRMED BUDGET & ITINERARY PLANNING WORKSPACE -->
+        <div class="card budget-confirmed-card" id="budget-confirmed-view" style="display: none;">
+          
+          <!-- Top Row: Status, Trip Duration & Actions -->
+          <div class="confirmed-badge-row">
+            <div class="confirmed-status-group">
+              <span class="confirmed-badge">&#10003; Budget Established</span>
+              <span class="confirmed-trip-title" id="confirmed-trip-title">Baguio City Trip</span>
+            </div>
+            <div class="confirmed-actions-group">
+              <button type="button" class="btn btn-outline btn-sm" id="btn-edit-confirmed-budget" title="Change your minimum and maximum budget">
+                &#9998; Edit Budget
+              </button>
+              <button type="button" class="btn btn-outline btn-sm" id="btn-load-sample-itinerary" title="Load sample 2-day plan">
+                &#10024; Load Sample Plan
+              </button>
+              <button type="button" class="btn btn-outline btn-sm text-danger" id="btn-clear-itinerary" title="Clear all stops">
+                &#128465; Clear All
+              </button>
+            </div>
+          </div>
+
+          <!-- Compact trip overview strip -->
+          <div class="itinerary-trip-summary">
+            <div class="trip-summary-item">
+              <span class="trip-summary-icon" aria-hidden="true">&#128197;</span>
+              <div class="trip-summary-copy">
+                <span class="trip-summary-label">Travel Dates</span>
+                <strong id="summary-date-range">&mdash;</strong>
+              </div>
+            </div>
+            <div class="trip-summary-item">
+              <span class="trip-summary-icon" aria-hidden="true">&#128101;</span>
+              <div class="trip-summary-copy">
+                <span class="trip-summary-label">Travelers</span>
+                <strong id="summary-travelers">1 Traveler</strong>
+              </div>
+            </div>
+            <div class="trip-summary-item">
+              <span class="trip-summary-icon" aria-hidden="true">&#9203;</span>
+              <div class="trip-summary-copy">
+                <span class="trip-summary-label">Duration</span>
+                <strong id="summary-days">2 Days</strong>
+              </div>
+            </div>
+            <div class="trip-summary-item trip-summary-total">
+              <span class="trip-summary-icon" aria-hidden="true">&#8369;</span>
+              <div class="trip-summary-copy">
+                <span class="trip-summary-label">Total Budget</span>
+                <strong id="summary-total-budget">&#8369;3,500</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- LEFT: day-by-day route planner -->
+          <div class="itinerary-main-column">
+            <!-- Planner Workspace Header & Day Filter Tabs -->
+            <div class="itinerary-workspace-header">
+              <div class="day-filter-tabs" id="itinerary-day-tabs">
+                <button type="button" class="day-tab-pill active" data-day="all">All Days</button>
+                <button type="button" class="day-tab-pill" data-day="1">Day 1</button>
+                <button type="button" class="day-tab-pill" data-day="2">Day 2</button>
+              </div>
+              <button type="button" class="btn btn-primary plan-add-fab" id="btn-open-add-stop-modal" aria-label="Add a place to your itinerary">
+                +
+              </button>
+            </div>
+
+            <!-- Day-by-Day Stops Container -->
+            <div class="itinerary-days-container" id="itinerary-days-list">
+              <!-- Dynamically populated by renderTimelineDays() -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>

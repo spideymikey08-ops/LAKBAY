@@ -1,0 +1,308 @@
+    <!-- ==================== SCREEN 1: HOME - EDITORIAL LANDING ==================== -->
+    <section class="app-screen active" id="section-home">
+      <div class="screen-container">
+
+        <!-- 1. HERO — Discover Baguio -->
+        <div class="editorial-hero">
+          <div class="hero-copy">
+            <span class="hero-eyebrow">
+              <span class="eyebrow-dot"></span>
+              The Summer Capital of the Philippines
+            </span>
+            <h1 class="hero-display">
+              <span class="hero-line">Find your way</span>
+              <span class="hero-line">to <span class="hero-highlight">Baguio.</span></span>
+            </h1>
+            <p class="hero-copy-text">
+              A little escape to the City of Pines. Discover places, plan your days, and make every moment count.
+            </p>
+            <div class="hero-actions">
+              <button type="button" class="btn btn-primary btn-lg" data-section="itinerary">
+                Plan Your Trip
+              </button>
+              <button type="button" class="btn btn-outline btn-lg" data-section="explore">
+                Explore Baguio
+              </button>
+            </div>
+          </div>
+
+          <div class="hero-photo-col">
+            <div class="hero-photo-frame">
+              <img src="assets/images/mines-view-park.jpeg" alt="Pine trees and mountain view in Baguio City" fetchpriority="high">
+              <span class="hero-photo-caption">16° north · 1,540 m above sea level</span>
+            </div>
+            <div class="hero-floating-note">
+              <strong>21</strong>
+              <span>Curated places</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. INTRODUCTION — The Beauty of the Highlands -->
+        <div class="editorial-section intro-section">
+          <div class="intro-grid">
+            <div class="intro-copy">
+              <span class="section-kicker">The Beauty of the Highlands</span>
+              <h2 class="editorial-title">A City Above the Ordinary.</h2>
+              <p class="editorial-lead">
+                Baguio rests high in the Cordillera mountains, where cool pine-scented air meets a culture shaped by
+                Igorot heritage. Spend a morning beside Burnham Park's lagoon, follow the scent of brewed coffee down
+                Session Road, taste strawberry taho from a neighborhood vendor, then climb toward a ridge where the
+                clouds settle over the city. Every turn reveals another reason to linger a little longer.
+              </p>
+              <p class="editorial-lead" style="margin-top: 1rem;">
+                From heritage gardens and museum galleries to strawberry farms and night markets, this is a place best
+                explored slowly — and planned well.
+              </p>
+
+              <div class="stat-grid">
+                <div class="stat-card">
+                  <span class="stat-value">1,540m</span>
+                  <span class="stat-label">Elevation</span>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-value">12–23°</span>
+                  <span class="stat-label">Typical temperature</span>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-value">20</span>
+                  <span class="stat-label">Curated destinations</span>
+                </div>
+                <div class="stat-card">
+                  <span class="stat-value">2–3</span>
+                  <span class="stat-label">Ideal days to explore</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trip planning progress (kept interactive) -->
+            <div class="progress-col">
+              <div class="card progress-card">
+                <div class="progress-panel-header">
+                  <div>
+                    <h3 class="progress-panel-title">Your journey at a glance</h3>
+                    <p class="progress-panel-subtitle">Two simple steps toward your Baguio plan</p>
+                  </div>
+                  <span class="progress-percentage" id="hero-progress-percent">0%</span>
+                </div>
+                <div class="progress-bar-track">
+                  <div class="progress-bar-fill" id="hero-progress-bar" style="width: 0%;"></div>
+                </div>
+
+                <div class="progress-steps-list">
+                  <div class="progress-step-item" id="step-budget">
+                    <div class="step-check-icon">
+                      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="step-details">
+                      <span class="step-name">1. Set your travel direction</span>
+                      <span class="step-status" id="step-budget-status">Not set yet</span>
+                    </div>
+                  </div>
+
+                  <div class="progress-step-item" id="step-stops">
+                    <div class="step-check-icon">
+                      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="step-details">
+                      <span class="step-name">2. Shape your daily stops</span>
+                      <span class="step-status" id="step-stops-status">0 stops planned</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="next-step-prompt" id="hero-next-step-box">
+                  <div class="next-step-info">
+                    <span class="next-step-tag">Next step</span>
+                    <p class="next-step-text" id="hero-next-step-text">Establish your estimated travel budget in the Itinerary Planner.</p>
+                  </div>
+                  <button type="button" class="btn btn-sm btn-primary next-step-btn" id="hero-next-step-btn" data-section="itinerary">
+                    Set Travel Budget &rarr;
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. FEATURED DESTINATIONS -->
+        <div class="editorial-section">
+          <div class="editorial-section-head">
+            <div>
+              <span class="section-kicker">Explore Destinations</span>
+              <h2 class="editorial-title">Places worth the detour.</h2>
+              <p class="editorial-lead">A small selection of the parks, ridges, gardens, and cultural corners waiting for you.</p>
+            </div>
+            <button type="button" class="link-btn" data-section="explore">See all 21 destinations &rarr;</button>
+          </div>
+
+          <div class="cards-grid home-featured-grid" id="home-featured-grid">
+            <!-- Dynamically populated by JS -->
+          </div>
+
+          <div class="featured-carousel-dots" id="featured-carousel-dots" role="tablist" aria-label="Featured destinations slider pagination">
+            <button type="button" class="carousel-dot active" data-page="0" aria-label="Page 1" role="tab" aria-selected="true"></button>
+            <button type="button" class="carousel-dot" data-page="1" aria-label="Page 2" role="tab" aria-selected="false"></button>
+            <button type="button" class="carousel-dot" data-page="2" aria-label="Page 3" role="tab" aria-selected="false"></button>
+            <button type="button" class="carousel-dot" data-page="3" aria-label="Page 4" role="tab" aria-selected="false"></button>
+            <button type="button" class="carousel-dot" data-page="4" aria-label="Page 5" role="tab" aria-selected="false"></button>
+          </div>
+        </div>
+
+        <!-- 4. EXPERIENCE BAGUIO -->
+        <div class="editorial-section">
+          <div class="editorial-section-head">
+            <div>
+              <span class="section-kicker">Experience Baguio</span>
+              <h2 class="editorial-title">The city is best tasted slowly.</h2>
+              <p class="editorial-lead">Follow the small rituals that make a highland visit feel like your own.</p>
+            </div>
+          </div>
+
+          <div class="experience-grid">
+            <article class="experience-card">
+              <img src="assets/images/session-road.jpeg" alt="Cafes and restaurants along Session Road" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">01 / FLAVORS</span>
+                <h3>Local food &amp; restaurants</h3>
+                <p>Warm soups, raisin bread, and Cordilleran dishes served in homegrown kitchens.</p>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <img src="assets/images/camp-john-hay.jpg" alt="Pine forest cafe setting in Camp John Hay" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">02 / SLOW MOMENTS</span>
+                <h3>Cafes &amp; coffee shops</h3>
+                <p>Benguet coffee, thick hot chocolate, and a window seat beneath the pines.</p>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <img src="assets/images/botanical-garden.jpeg" alt="Green gardens in Baguio" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">03 / THE FIELDS</span>
+                <h3>Strawberry picking</h3>
+                <p>Head to the outskirts for cool air, sweet berries, and a basket worth bringing home.</p>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <img src="assets/images/night-market.jpeg" alt="Night market stalls in Baguio" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">04 / AFTER DARK</span>
+                <h3>Shopping &amp; local markets</h3>
+                <p>From ukay finds on Harrison Road to handcrafted souvenirs and jars of ube jam.</p>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <img src="assets/images/tam-awan-village.jpeg" alt="Traditional Ifugao huts at Tam-Awan Village" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">05 / HERITAGE</span>
+                <h3>Cultural attractions</h3>
+                <p>Ancient stonework, living traditions, and galleries shaped by Cordilleran artists.</p>
+              </div>
+            </article>
+
+            <article class="experience-card">
+              <img src="assets/images/sky-ranch.jpeg" alt="Open mountain terrain near Baguio" loading="lazy">
+              <div class="experience-card-body">
+                <span class="experience-index">06 / OUTDOORS</span>
+                <h3>Nature &amp; open air</h3>
+                <p>Pine trails, garden paths, and ridge views made for unhurried mornings.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- 5. TRAVEL GUIDE -->
+        <div class="editorial-section">
+          <div class="editorial-section-head">
+            <div>
+              <span class="section-kicker">Travel Guide</span>
+              <h2 class="editorial-title">The practical details, beautifully simple.</h2>
+              <p class="editorial-lead">Everything you need before you go, gathered in one quiet place.</p>
+            </div>
+          </div>
+
+          <div class="guide-grid">
+            <article class="guide-card">
+              <div class="guide-card-head">
+                <span class="guide-card-icon">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="8" rx="2"></rect><path d="M5 19v2M19 19v2M7 11V7a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v4"></path></svg>
+                </span>
+                <h3>Getting there</h3>
+              </div>
+              <p><strong>By bus:</strong> roughly 4–6 hours from Manila to Baguio. <strong>Around town:</strong> jeepneys, taxis, and ride-hailing services cover most destinations.</p>
+            </article>
+
+            <article class="guide-card">
+              <div class="guide-card-head">
+                <span class="guide-card-icon">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                </span>
+                <h3>Estimated expenses</h3>
+              </div>
+              <p>Budget around <strong>₱1,500–₱3,500</strong> for a modest two-day trip, excluding intercity transport. Entrance fees are usually ₱0–₱200.</p>
+            </article>
+
+            <article class="guide-card">
+              <div class="guide-card-head">
+                <span class="guide-card-icon">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11h18M5 11V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5M4 11v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path></svg>
+                </span>
+                <h3>Where to eat</h3>
+              </div>
+              <p>Start with strawberry taho and raisin bread, then try Cordilleran specialties, hot chocolate, and a slow dinner along Session Road.</p>
+            </article>
+
+            <article class="guide-card">
+              <div class="guide-card-head">
+                <span class="guide-card-icon">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+                </span>
+                <h3>Travel tips</h3>
+              </div>
+              <p>Visit popular spots before 10 AM, keep small bills handy, and check opening days for museums before finalizing your route.</p>
+            </article>
+
+            <article class="guide-card">
+              <div class="guide-card-head">
+                <span class="guide-card-icon">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"></path></svg>
+                </span>
+                <h3>Packing essentials</h3>
+              </div>
+              <p>Bring a light jacket, comfortable walking shoes, an umbrella, a reusable bottle, and a small pouch for cash and IDs.</p>
+            </article>
+
+            <article class="guide-card">
+              <div class="guide-card-head">
+                <span class="guide-card-icon">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg>
+                </span>
+                <h3>Good to remember</h3>
+              </div>
+              <p>Respect heritage sites, follow local jeepney routes, and leave extra time for the winding roads into the mountains.</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- 6. FINAL CTA -->
+        <div class="final-cta">
+          <img src="assets/images/camp-john-hay.jpg" alt="Pine trees in the Baguio highlands" loading="lazy">
+          <div class="final-cta-content">
+            <span class="section-kicker">Your Baguio Story Starts Here</span>
+            <h2 class="final-cta-title">Your Next Chapter Begins in Baguio.</h2>
+            <p class="final-cta-text">
+              Build your itinerary, discover hidden gems, and make your highland getaway unforgettable.
+            </p>
+            <button type="button" class="btn btn-primary btn-lg" data-section="itinerary">
+              Create My Itinerary
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
